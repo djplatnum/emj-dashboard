@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EMJ Auto Dashboard — Live</title>
+<title>Smart Money Scanner — Level The Field</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -159,6 +159,28 @@ body{background:var(--bg);color:var(--text);font-family:"DM Sans",system-ui;}
 .dr-row .dvr{font-weight:700;color:var(--red);}
 .dr-footer{background:rgba(6,214,160,0.07);border:1px solid rgba(6,214,160,0.2);border-radius:7px;padding:8px 12px;font-size:11px;color:var(--green);font-weight:600;margin-top:10px;text-align:center;}
 .dr-card-footer{background:rgba(6,214,160,0.07);border:1px solid rgba(6,214,160,0.2);border-radius:0 0 12px 12px;padding:8px 18px;font-size:11px;color:var(--green);font-weight:600;text-align:center;}
+.calc-box{background:rgba(68,136,255,0.05);border:1px solid rgba(68,136,255,0.25);border-radius:10px;padding:14px;margin-top:12px;}
+.calc-title{font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px;}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.calc-field{display:flex;flex-direction:column;gap:4px;}
+.calc-label{font-size:10px;color:var(--muted);font-weight:600;}
+.calc-input{background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:8px 10px;color:var(--text);font-size:13px;font-weight:700;outline:none;font-family:"DM Sans",system-ui;width:100%;}
+.calc-input:focus{border-color:var(--blue);}
+.calc-btn{width:100%;background:linear-gradient(135deg,#4488ff,#2266dd);color:#fff;font-weight:800;font-size:13px;border:none;border-radius:8px;padding:10px;cursor:pointer;font-family:"DM Sans",system-ui;margin-bottom:10px;}
+.calc-results{display:none;}
+.calc-result-title{font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;}
+.cr-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:12px;}
+.cr-row:last-child{border:none;}
+.cr-row .cl{color:var(--muted);}
+.cr-row .cv-g{font-weight:700;color:var(--green);}
+.cr-row .cv-r{font-weight:700;color:var(--red);}
+.cr-row .cv-y{font-weight:700;color:var(--yellow);}
+.cr-row .cv-b{font-weight:700;color:var(--blue);}
+.move-table{margin-top:10px;}
+.move-table-title{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:6px;}
+.move-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:11px;}
+.move-row.hdr{font-weight:700;color:var(--muted);font-size:10px;}
+.move-row .mc{text-align:center;}
 @media(max-width:650px){.bp-grid{grid-template-columns:1fr;}.brief-stats{grid-template-columns:1fr 1fr;}.ev-grid{grid-template-columns:1fr;}}
 </style>
 </head>
@@ -166,10 +188,10 @@ body{background:var(--bg);color:var(--text);font-family:"DM Sans",system-ui;}
 <div class="wrap">
 
   <div class="header">
-    <div class="logo">EMJ</div>
+    <div class="logo">SMS</div>
     <div class="htext">
-      <div class="title">AUTO INTELLIGENCE DASHBOARD</div>
-      <div class="subtitle">Live prices · Pattern analysis · Best plays · Built for the common investor</div>
+      <div class="title">SMART MONEY SCANNER</div>
+      <div class="subtitle">Institutional signals · Defined risk trades · Level the field</div>
     </div>
     <div class="hright">
       <div class="clock" id="clock">--:--</div>
@@ -195,7 +217,7 @@ body{background:var(--bg);color:var(--text);font-family:"DM Sans",system-ui;}
 
   <div id="brief-section">
     <div class="brief-box">
-      <div class="brief-title">📋 EMJ MORNING BRIEF</div>
+      <div class="brief-title">📋 SMART MONEY SCANNER — MORNING BRIEF</div>
       <div class="brief-body" id="brief-body"></div>
       <div class="brief-stats">
         <div class="bstat g"><div class="bl">Strong Buy</div><div class="bv" id="cnt-g">0</div></div>
@@ -452,7 +474,7 @@ function buildBrief(results,plays){
   document.getElementById('cnt-r').textContent=rc;
   document.getElementById('cnt-b').textContent=plays[0]?.stock.t||'—';
   document.getElementById('brief-body').innerHTML=`
-    <strong>EMJ scan completed at ${timeStr}.</strong> ${liveCount>0?`<strong style="color:var(--green)">${liveCount} live prices loaded from Finnhub.</strong>`:'Pattern-based prices active — tap Verify to check live price on Yahoo.'}<br><br>
+    <strong>Smart Money Scanner completed at ${timeStr}.</strong> ${liveCount>0?`<strong style="color:var(--green)">${liveCount} live prices loaded from Finnhub.</strong>`:'Pattern-based prices active — tap Verify to check live price on Yahoo.'}<br><br>
     Out of 20 stocks, <strong style="color:var(--green)">${gc} Strong Buy</strong>, ${yc} Watch, ${rc} Avoid. Market sentiment: <strong style="color:${gc>rc?'var(--green)':'var(--yellow)'}">${mood}</strong>.<br><br>
     <strong>${bullVOI} stocks</strong> show Bullish New Money. <strong>${sweeps} Call Sweeps</strong> detected.<br><br>
     <strong style="color:var(--gold2)">#1 best play: ${plays[0]?.stock.t||'—'}</strong>${plays[0]?` at $${plays[0].a.price.toFixed(2)}${plays[0].a.isLive?' (live)':''}. Consider a ${plays[0].a.optType} near $${plays[0].a.target}, 30-45 days out. Cost: $${plays[0].a.cost}. Max loss: $${plays[0].a.cost}.`:'.'}<br><br>
@@ -522,7 +544,7 @@ function renderCard(stock,a,idx){
 
   <div class="tc active" id="tc-tutor-${id}">
     <div class="verdict ${a.sigClass}">${vt}</div>
-    <div class="tutor-box"><div class="tutor-lbl">🎓 EMJ Tutor Says</div>${a.tutorText}</div>
+    <div class="tutor-box"><div class="tutor-lbl">🎓 Smart Money Tutor Says</div>${a.tutorText}</div>
     <div class="voi-box">
       <div class="voi-title">🔑 Volume ÷ Open Interest Signal</div>
       <div class="voi-formula">VOL ÷ OI = ${a.voi} → ${a.voiSignal}</div>
@@ -581,6 +603,27 @@ function renderCard(stock,a,idx){
       <div class="pr-row"><span class="lbl">10 Contracts ($${(a.cost*10).toLocaleString()})</span><span class="val vg">+$${(a.netProfit*10).toLocaleString()}</span></div>
     </div>
     <div style="font-size:10px;color:var(--muted);line-height:1.6">Liquidity: <strong style="color:var(--gold)">${a.liq}</strong> · IV: <strong style="color:var(--yellow)">${a.iv}</strong> · SI: <strong style="color:var(--red)">${a.si}</strong><br>⚠️ Always verify actual premiums on Fidelity before placing any trade.</div>
+    <div class="calc-box">
+      <div class="calc-title">🧮 Options P&L Calculator — Run Your Own Numbers</div>
+      <div class="calc-grid">
+        <div class="calc-field"><label class="calc-label">Strike Price ($)</label><input class="calc-input" id="ci-strike-${id}" type="number" placeholder="${a.target.toFixed(2)}" value="${a.target.toFixed(2)}"></div>
+        <div class="calc-field"><label class="calc-label">Premium Paid ($)</label><input class="calc-input" id="ci-prem-${id}" type="number" placeholder="${a.cost}" value="${a.cost}"></div>
+        <div class="calc-field"><label class="calc-label">Contracts</label><input class="calc-input" id="ci-contracts-${id}" type="number" placeholder="1" value="1"></div>
+        <div class="calc-field"><label class="calc-label">Days To Expiration</label><input class="calc-input" id="ci-dte-${id}" type="number" placeholder="30" value="30"></div>
+        <div class="calc-field"><label class="calc-label">Current Stock Price ($)</label><input class="calc-input" id="ci-curr-${id}" type="number" placeholder="${a.price.toFixed(2)}" value="${a.price.toFixed(2)}"></div>
+        <div class="calc-field"><label class="calc-label">Option Type</label><select class="calc-input" id="ci-type-${id}"><option value="CALL" ${a.optType==='CALL'?'selected':''}>CALL</option><option value="PUT" ${a.optType==='PUT'?'selected':''}>PUT</option></select></div>
+      </div>
+      <button class="calc-btn" onclick="runCalc('${id}')">📊 CALCULATE P&L</button>
+      <div class="calc-results" id="cr-${id}">
+        <div class="calc-result-title">📊 Your Trade Breakdown</div>
+        <div id="cr-rows-${id}"></div>
+        <div class="move-table">
+          <div class="move-table-title">Price Movement Scenarios</div>
+          <div class="move-row hdr"><span class="mc">Stock Price</span><span class="mc">Move</span><span class="mc">P&L</span></div>
+          <div id="cr-moves-${id}"></div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="tc" id="tc-fidelity-${id}">
@@ -595,7 +638,7 @@ function renderCard(stock,a,idx){
       <div class="ev-card ev-sell"><div class="ev-lbl">✅ SELL — Always Do This</div><p>When your option goes up in value, sell the contract back to the market for profit. You never touch the shares. Profit is the difference between what you paid and what you sell for. Exactly what Keith Gill did.</p></div>
       <div class="ev-card ev-ex"><div class="ev-lbl">❌ EXERCISE — Almost Never</div><p>Exercising means buying 100 actual shares at the strike price. Requires thousands in extra cash and leaves time value money on the table. Professionals almost always sell the contract instead.</p></div>
     </div>
-    <div class="ev-rec">🎓 <strong>EMJ Tutor:</strong> ${a.exerciseWarn}</div>
+    <div class="ev-rec">🎓 <strong>Smart Money Tutor:</strong> ${a.exerciseWarn}</div>
   </div>
   <div class="dr-card-footer">🛡️ Defined Risk Trade — Max Loss $${a.cost} · Cannot Lose More Than Premium Paid</div>
 </div>`;
@@ -673,6 +716,40 @@ async function runScan(){
 }
 
 window.addEventListener('load',()=>setTimeout(runScan,800));
+
+function runCalc(id){
+  const strike=parseFloat(document.getElementById('ci-strike-'+id).value)||0;
+  const prem=parseFloat(document.getElementById('ci-prem-'+id).value)||0;
+  const contracts=parseInt(document.getElementById('ci-contracts-'+id).value)||1;
+  const dte=parseInt(document.getElementById('ci-dte-'+id).value)||30;
+  const curr=parseFloat(document.getElementById('ci-curr-'+id).value)||0;
+  const type=document.getElementById('ci-type-'+id).value;
+  if(!strike||!prem||!curr){alert('Please fill in all fields');return;}
+  const totalCost=prem*contracts;
+  const breakeven=type==='CALL'?strike+(prem/100):strike-(prem/100);
+  const intrinsic=type==='CALL'?Math.max(0,curr-strike):Math.max(0,strike-curr);
+  const timeDecayWarning=dte<=7?'⚠️ DANGER — Less than 7 days left. Time decay is destroying value fast.':dte<=14?'⚠️ WARNING — Under 2 weeks. Consider taking profits soon.':'✅ Healthy — Enough time for the trade to work.';
+  const rowsEl=document.getElementById('cr-rows-'+id);
+  const movesEl=document.getElementById('cr-moves-'+id);
+  rowsEl.innerHTML=`
+    <div class="pr-row"><span class="lbl">Total Cost (${contracts} contract${contracts>1?'s':''})</span><span class="val vr">$${totalCost.toLocaleString()}</span></div>
+    <div class="pr-row"><span class="lbl">Breakeven Price</span><span class="val vgold">$${breakeven.toFixed(2)}</span></div>
+    <div class="pr-row"><span class="lbl">Current Intrinsic Value</span><span class="val ${intrinsic>0?'vg':'vr'}">$${(intrinsic*100*contracts).toFixed(2)}</span></div>
+    <div class="pr-row"><span class="lbl">Max Loss (Worst Case)</span><span class="val vr">-$${totalCost.toLocaleString()} only</span></div>
+    <div class="pr-row"><span class="lbl">Days To Expiration</span><span class="val">${dte} days</span></div>
+    <div style="background:rgba(255,209,102,0.08);border:1px solid rgba(255,209,102,0.25);border-radius:7px;padding:8px 10px;font-size:11px;color:var(--yellow);margin:8px 0;">${timeDecayWarning}</div>
+  `;
+  const moves=type==='CALL'
+    ?[[-20,-15,-10,-5,0,5,10,15,20,30].map(pct=>({pct,price:curr*(1+pct/100)}))]
+    :[[-30,-20,-15,-10,-5,0,5,10,15,20].map(pct=>({pct,price:curr*(1+pct/100)}))];
+  movesEl.innerHTML=moves[0].map(({pct,price})=>{
+    const iv=type==='CALL'?Math.max(0,price-strike):Math.max(0,strike-price);
+    const pl=((iv*100)-prem)*contracts;
+    const color=pl>0?'var(--green)':pl===0?'var(--yellow)':'var(--red)';
+    return `<div class="move-row"><span class="mc">$${price.toFixed(2)}</span><span class="mc" style="color:${pct>=0?'var(--green)':'var(--red)'}">${pct>=0?'+':''}${pct}%</span><span class="mc" style="color:${color};font-weight:700">${pl>=0?'+':''}$${pl.toFixed(0)}</span></div>`;
+  }).join('');
+  document.getElementById('cr-'+id).style.display='block';
+}
 </script>
 </body>
 </html>
