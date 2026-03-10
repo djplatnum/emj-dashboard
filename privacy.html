@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<!--
+  Smart Money Scanner — Privacy Policy
+  Copyright © 2026 Edwin M. Jordan. All rights reserved.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Smart Money Scanner</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07090f;--card:#0e1520;--border:#1a2540;--surface:#0b1018;
+  --gold:#f0a500;--gold2:#ffd166;--green:#06d6a0;--red:#ef476f;
+  --text:#dde6f5;--muted:#4e6080;--blue:#4d8eff;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:"DM Sans",system-ui;min-height:100vh;line-height:1.7;}
+.wrap{max-width:800px;margin:auto;padding:24px 16px 60px;}
+
+.header{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px 24px;margin-bottom:24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.logo{background:linear-gradient(135deg,#f0a500,#b06000);color:#000;font-family:"Bebas Neue",sans-serif;font-size:22px;padding:8px 14px;border-radius:8px;flex-shrink:0;}
+.htext .title{font-size:17px;font-weight:700;color:var(--gold);}
+.htext .subtitle{font-size:11px;color:var(--muted);margin-top:2px;}
+.back-btn{margin-left:auto;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:var(--text);font-size:12px;font-weight:700;border-radius:8px;padding:8px 16px;cursor:pointer;text-decoration:none;font-family:"DM Sans",system-ui;}
+
+.hero{background:linear-gradient(135deg,rgba(77,142,255,0.1),rgba(6,214,160,0.05));border:1px solid rgba(77,142,255,0.2);border-radius:14px;padding:32px 28px;margin-bottom:24px;text-align:center;}
+.hero-title{font-family:"Bebas Neue",sans-serif;font-size:36px;color:#4d8eff;letter-spacing:1px;margin-bottom:8px;}
+.hero-sub{font-size:13px;color:var(--muted);margin-bottom:12px;}
+.effective{display:inline-block;background:rgba(77,142,255,0.1);border:1px solid rgba(77,142,255,0.25);border-radius:6px;padding:4px 14px;font-size:11px;font-weight:700;color:#4d8eff;text-transform:uppercase;letter-spacing:0.6px;}
+
+.promise-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px;}
+.promise{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 14px;text-align:center;}
+.promise-icon{font-size:24px;margin-bottom:8px;}
+.promise-title{font-size:11px;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:4px;}
+.promise-text{font-size:10px;color:var(--muted);line-height:1.5;}
+
+.section{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin-bottom:16px;}
+.section-num{display:inline-block;background:linear-gradient(135deg,#4d8eff,#2060cc);color:#fff;font-family:"Bebas Neue",sans-serif;font-size:13px;padding:3px 10px;border-radius:5px;margin-bottom:12px;}
+.section-title{font-size:16px;font-weight:700;color:#4d8eff;margin-bottom:12px;}
+.section p{font-size:13px;color:var(--text);margin-bottom:10px;line-height:1.75;}
+.section p:last-child{margin-bottom:0;}
+.section ul{list-style:none;padding:0;margin:10px 0;}
+.section ul li{font-size:13px;color:var(--text);padding:5px 0 5px 18px;position:relative;line-height:1.6;}
+.section ul li::before{content:"→";position:absolute;left:0;color:#4d8eff;font-weight:700;}
+.section strong{color:var(--gold2);}
+.highlight{background:rgba(6,214,160,0.06);border-left:3px solid var(--green);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0;font-size:13px;color:var(--text);}
+.no-sell{background:rgba(6,214,160,0.08);border:1px solid rgba(6,214,160,0.25);border-radius:10px;padding:14px 18px;margin:14px 0;display:flex;align-items:center;gap:12px;}
+.no-sell-icon{font-size:20px;flex-shrink:0;}
+.no-sell-text{font-size:12px;color:var(--green);font-weight:700;line-height:1.5;}
+
+.data-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12px;}
+.data-table th{padding:10px 12px;text-align:left;font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.6px;border-bottom:2px solid var(--border);}
+.data-table td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text);vertical-align:top;line-height:1.5;}
+.data-table tr:last-child td{border:none;}
+.yes{color:var(--green);font-weight:700;}
+.no{color:var(--red);font-weight:700;}
+
+.contact-box{background:linear-gradient(135deg,rgba(77,142,255,0.08),rgba(6,214,160,0.05));border:1px solid rgba(77,142,255,0.2);border-radius:12px;padding:20px 24px;margin-bottom:16px;text-align:center;}
+.contact-title{font-size:14px;font-weight:700;color:#4d8eff;margin-bottom:6px;}
+.contact-text{font-size:12px;color:var(--muted);line-height:1.7;}
+
+.rights-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;}
+.right-item{background:rgba(0,0,0,0.2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;}
+.right-title{font-size:11px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;}
+.right-text{font-size:11px;color:var(--muted);line-height:1.5;}
+
+.footer-legal{text-align:center;font-size:11px;color:var(--muted);padding-top:16px;border-top:1px solid var(--border);line-height:1.8;}
+.footer-legal a{color:var(--gold);text-decoration:none;}
+
+@media(max-width:550px){
+  .promise-grid{grid-template-columns:1fr;}
+  .rights-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div class="logo">SM$</div>
+    <div class="htext">
+      <div class="title">SMART MONEY SCANNER</div>
+      <div class="subtitle">Institutional signals · Defined risk trades · Level the field</div>
+    </div>
+    <a class="back-btn" href="index.html">← Back to Scanner</a>
+  </div>
+
+  <div class="hero">
+    <div class="hero-title">Privacy Policy</div>
+    <div class="hero-sub">Your privacy matters. Here is exactly what we collect and what we do with it.</div>
+    <span class="effective">Effective Date: March 10, 2026</span>
+  </div>
+
+  <div class="promise-grid">
+    <div class="promise">
+      <div class="promise-icon">🚫</div>
+      <div class="promise-title">Never Sold</div>
+      <div class="promise-text">We never sell your personal data to third parties. Ever.</div>
+    </div>
+    <div class="promise">
+      <div class="promise-icon">🔒</div>
+      <div class="promise-title">Secure</div>
+      <div class="promise-text">Payment data handled exclusively by Stripe and PayPal. We never see your card.</div>
+    </div>
+    <div class="promise">
+      <div class="promise-icon">✅</div>
+      <div class="promise-title">Transparent</div>
+      <div class="promise-text">This policy tells you exactly what we collect and why. No hidden practices.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">01</div>
+    <div class="section-title">Who We Are</div>
+    <p>Smart Money Scanner is operated by <strong>Edwin M. Jordan</strong>, an individual operator based in the United States. This privacy policy explains how we collect, use, and protect information when you use Smart Money Scanner at smartmoneyscanner.netlify.app.</p>
+    <p>By using Smart Money Scanner you agree to the collection and use of information as described in this policy.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">02</div>
+    <div class="section-title">What Information We Collect</div>
+    <p>We collect the minimum information necessary to operate the service.</p>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Data Type</th>
+          <th>What It Is</th>
+          <th>Why We Collect It</th>
+          <th>Stored?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Trading Journal Data</strong></td>
+          <td>Trades you log, ticker symbols, P&L entries</td>
+          <td>To power your personal 30-day journal</td>
+          <td>Locally in your browser only</td>
+        </tr>
+        <tr>
+          <td><strong>Payment Information</strong></td>
+          <td>Credit/debit card, PayPal details</td>
+          <td>To process subscription payments</td>
+          <td>Never — handled by Stripe/PayPal</td>
+        </tr>
+        <tr>
+          <td><strong>Email Address</strong></td>
+          <td>Your email if you subscribe</td>
+          <td>Account management, receipts</td>
+          <td>Yes — securely stored</td>
+        </tr>
+        <tr>
+          <td><strong>Usage Data</strong></td>
+          <td>Pages visited, scan activity, general usage</td>
+          <td>To improve the app experience</td>
+          <td>Anonymized analytics only</td>
+        </tr>
+        <tr>
+          <td><strong>Device Info</strong></td>
+          <td>Browser type, device type, IP address</td>
+          <td>Security, troubleshooting</td>
+          <td>Standard server logs only</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="no-sell">
+      <div class="no-sell-icon">🛡️</div>
+      <div class="no-sell-text">We do not sell, rent, or trade your personal information to any third party for marketing purposes. This is an absolute commitment.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">03</div>
+    <div class="section-title">How We Use Your Information</div>
+    <p>Information we collect is used only for the following purposes:</p>
+    <ul>
+      <li>Providing and improving Smart Money Scanner features</li>
+      <li>Processing subscription payments and sending receipts</li>
+      <li>Communicating important service updates or changes</li>
+      <li>Responding to your support requests</li>
+      <li>Preventing fraud and maintaining security</li>
+      <li>Complying with legal obligations</li>
+    </ul>
+    <div class="highlight">Your trading journal data stays in your browser's local storage. It never leaves your device and is never transmitted to our servers.</div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">04</div>
+    <div class="section-title">Third-Party Services We Use</div>
+    <p>Smart Money Scanner uses the following third-party services. Each has their own privacy policy:</p>
+    <ul>
+      <li><strong>Finnhub.io</strong> — Real-time stock price data. Your ticker searches may be logged by Finnhub per their terms.</li>
+      <li><strong>Massive.com</strong> — Options chain data. Data requests are subject to Massive.com's privacy policy.</li>
+      <li><strong>Stripe</strong> — Payment processing. Stripe handles all credit/debit card data. We never store card numbers.</li>
+      <li><strong>PayPal</strong> — Alternative payment processing. PayPal handles all PayPal transactions.</li>
+      <li><strong>Netlify</strong> — Website hosting. Netlify may collect standard access logs.</li>
+      <li><strong>Google Fonts</strong> — Typography. Google may receive font requests from your browser.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-num">05</div>
+    <div class="section-title">Cookies & Local Storage</div>
+    <p>Smart Money Scanner uses <strong>browser local storage</strong> (not traditional cookies) to save your preferences and trading journal data on your device. This data:</p>
+    <ul>
+      <li>Never leaves your device</li>
+      <li>Is not accessible by us or any third party</li>
+      <li>Can be cleared at any time through your browser settings</li>
+      <li>Includes: language preference, journal entries, challenge start date</li>
+    </ul>
+    <p>We do not use advertising cookies or tracking pixels.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">06</div>
+    <div class="section-title">Your Privacy Rights</div>
+    <p>You have the following rights regarding your personal information:</p>
+    <div class="rights-grid">
+      <div class="right-item">
+        <div class="right-title">Access</div>
+        <div class="right-text">Request a copy of any personal data we hold about you.</div>
+      </div>
+      <div class="right-item">
+        <div class="right-title">Deletion</div>
+        <div class="right-text">Request deletion of your account and associated data.</div>
+      </div>
+      <div class="right-item">
+        <div class="right-title">Correction</div>
+        <div class="right-text">Request correction of inaccurate personal information.</div>
+      </div>
+      <div class="right-item">
+        <div class="right-title">Opt Out</div>
+        <div class="right-text">Opt out of any marketing communications at any time.</div>
+      </div>
+    </div>
+    <p>To exercise any of these rights, contact us through the app. We will respond within 30 days.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">07</div>
+    <div class="section-title">Children's Privacy</div>
+    <p>Smart Money Scanner is not directed to individuals under the age of 18. We do not knowingly collect personal information from minors. If you believe a minor has provided us with personal information, contact us immediately and we will delete it.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">08</div>
+    <div class="section-title">Data Security</div>
+    <p>We take reasonable measures to protect your information including encrypted connections (HTTPS), secure payment processing through PCI-compliant providers, and limiting data collection to what is strictly necessary.</p>
+    <p>However, no method of transmission over the internet is 100% secure. We cannot guarantee absolute security but commit to notifying you promptly in the event of any data breach affecting your information.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">09</div>
+    <div class="section-title">Changes to This Policy</div>
+    <p>We may update this privacy policy from time to time. Changes will be posted on this page with an updated effective date. Significant changes will be communicated to subscribers via email. Continued use of Smart Money Scanner after changes constitutes acceptance of the updated policy.</p>
+  </div>
+
+  <div class="contact-box">
+    <div class="contact-title">Privacy Questions or Requests?</div>
+    <div class="contact-text">
+      Smart Money Scanner is operated by Edwin M. Jordan.<br>
+      For any privacy-related questions, data requests, or concerns,<br>
+      contact us through the app at smartmoneyscanner.netlify.app.<br><br>
+      We take privacy seriously and will respond within 30 days.
+    </div>
+  </div>
+
+  <div class="footer-legal">
+    <strong>Copyright © 2026 Edwin M. Jordan. All rights reserved.</strong><br>
+    Smart Money Scanner · "Level the Field"<br><br>
+    <a href="index.html">← Back to Scanner</a> &nbsp;·&nbsp; <a href="terms.html">Terms of Service</a>
+  </div>
+
+</div>
+</body>
+</html>
