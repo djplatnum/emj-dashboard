@@ -7,9 +7,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#07090f;--card:#111620;--border:#1c2638;--surface:#0d1117;
+  --bg:#07090f;--card:#0e1520;--border:#1a2540;--surface:#0b1018;
   --gold:#f0a500;--gold2:#ffd166;--green:#06d6a0;--red:#ef476f;
-  --yellow:#ffd166;--text:#e2e8f4;--muted:#5a6a8a;--blue:#4488ff;
+  --yellow:#ffd166;--text:#dde6f5;--muted:#4e6080;--blue:#4d8eff;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:"DM Sans",system-ui;}
@@ -37,9 +37,9 @@ body{background:var(--bg);color:var(--text);font-family:"DM Sans",system-ui;}
 .bp-hdr{font-family:"Bebas Neue",sans-serif;font-size:20px;color:var(--gold);margin-bottom:10px;}
 .bp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
 .bpc{border-radius:12px;padding:14px;position:relative;overflow:hidden;}
-.bpc.r1{background:linear-gradient(135deg,rgba(6,214,160,0.10),rgba(6,214,160,0.03));border:2px solid var(--green);}
-.bpc.r2{background:linear-gradient(135deg,rgba(240,165,0,0.09),rgba(240,165,0,0.02));border:2px solid var(--gold);}
-.bpc.r3{background:linear-gradient(135deg,rgba(68,136,255,0.09),rgba(68,136,255,0.02));border:2px solid var(--blue);}
+.bpc.r1{background:linear-gradient(135deg,rgba(6,214,160,0.10),rgba(6,214,160,0.03));border:2px solid transparent;background-clip:padding-box;box-shadow:0 0 0 2px var(--green),0 4px 20px rgba(6,214,160,0.2);position:relative;}
+.bpc.r2{background:linear-gradient(135deg,rgba(240,165,0,0.09),rgba(240,165,0,0.02));border:2px solid transparent;box-shadow:0 0 0 2px var(--gold),0 4px 16px rgba(240,165,0,0.15);}
+.bpc.r3{background:linear-gradient(135deg,rgba(68,136,255,0.09),rgba(68,136,255,0.02));border:2px solid transparent;box-shadow:0 0 0 2px var(--blue),0 4px 12px rgba(68,136,255,0.12);}
 .bpc-num{position:absolute;top:8px;right:10px;font-family:"Bebas Neue",sans-serif;font-size:40px;opacity:0.10;line-height:1;}
 .bpc.r1 .bpc-num{color:var(--green);}.bpc.r2 .bpc-num{color:var(--gold);}.bpc.r3 .bpc-num{color:var(--blue);}
 .bpc-tk{font-family:"Bebas Neue",sans-serif;font-size:30px;line-height:1;}
@@ -73,6 +73,9 @@ body{background:var(--bg);color:var(--text);font-family:"DM Sans",system-ui;}
 .btn-scan{background:var(--surface);border:1px solid var(--border);color:var(--text);font-weight:600;font-size:13px;border-radius:10px;padding:11px 18px;cursor:pointer;font-family:"DM Sans",system-ui;}
 .btn-analyze:disabled,.btn-scan:disabled{opacity:0.4;cursor:not-allowed;}
 .card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:14px;animation:fadeUp 0.3s ease both;}
+.card.card-strong{border:2px solid var(--green);box-shadow:0 0 20px rgba(6,214,160,0.15);}
+.card.card-watch{border:2px solid var(--yellow);box-shadow:0 0 12px rgba(255,209,102,0.08);}
+.card.card-top-play{border:2px solid var(--gold);box-shadow:0 0 28px rgba(240,165,0,0.25),0 0 8px rgba(6,214,160,0.15);}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .card-top{padding:16px 18px 12px;display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid var(--border);}
 .ticker{font-family:"Bebas Neue",sans-serif;font-size:26px;}
@@ -517,14 +520,14 @@ function buildBrief(results,plays){
 }
 
 // ── FULL STOCK CARD WITH ALL 5 TABS ────────────────────────────────────────
-function renderCard(stock,a,idx){
+function renderCard(stock,a,idx,isTopPlay=false){
   const id=stock.t+'_'+idx;
   const cs=a.changePct>=0?'+':'';
   const cc=a.changePct>=0?'up':'dn';
   const em=a.sigClass==='g'?'🟢':a.sigClass==='y'?'🟡':'🔴';
   const bc=a.sigClass==='g'?'var(--green)':a.sigClass==='y'?'var(--yellow)':'var(--red)';
   const vt=a.sigClass==='g'?'✅ GOOD TRADE SETUP — OPTIONS CHAIN CONFIRMS':a.sigClass==='y'?'⏳ PATTERN FORMING — WATCH BUT DO NOT ACT YET':'❌ SKIP THIS — CHAIN NOT FAVORABLE NOW';
-  const p=a.pat;
+  const cardClass=isTopPlay?'card card-top-play':a.sigClass==='g'?'card card-strong':a.sigClass==='y'?'card card-watch':'card';
   let badges=[];
   if(p.callWall)  badges.push('<span class="pb pb-cw">🟢 Call Wall</span>');
   if(p.putWall)   badges.push('<span class="pb pb-pw">🔴 Put Wall</span>');
@@ -546,8 +549,13 @@ function renderCard(stock,a,idx){
     ['Exit — Sell to Close',`${a.sellRec.split('.')[0]}. Go to your position and tap <strong>Sell to Close</strong>.`]
   ].map((s,i)=>`<div class="fid-step"><div class="snum">${i+1}</div><div class="stxt"><strong>${s[0]}</strong><span>${s[1]}</span></div></div>`).join('');
 
+  const cardClass=a.sigClass==='g'?'card card-strong':a.sigClass==='y'?'card card-watch':'card';
+
+  const p=a.pat;
+
   return `
-<div class="card" style="animation-delay:${idx*0.04}s;border-top:3px solid ${bc}">
+<div class="${cardClass}" style="animation-delay:${idx*0.04}s">
+  ${isTopPlay?'<div style="background:linear-gradient(90deg,rgba(240,165,0,0.15),rgba(6,214,160,0.1));padding:6px 18px;font-size:10px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid rgba(240,165,0,0.2);">⭐ TOP PLAY — STRONGEST SIGNAL TODAY</div>':''}
   <div class="card-top">
     <div>
       <div class="ticker">${stock.t}</div>
@@ -698,7 +706,7 @@ async function searchOne(){
   const live=await fetchLive(val);
   const a=buildAnalysis(val,live);
   document.getElementById('results').innerHTML=renderCard(wl,a,0);
-  populateExpDates(wl.t+'0');
+  setTimeout(()=>populateExpDates(wl.t+'_0'),150);
   document.getElementById('searchInput').value='';
   ab.disabled=false;ab.textContent='ANALYZE';
 }
@@ -734,14 +742,16 @@ async function runScan(){
 
   results.sort((a,b)=>b.a.score-a.a.score);
   const best=results.slice(0,3);
+  const positiveResults=results.filter(r=>r.a.sigClass==='g'||r.a.sigClass==='y');
 
   document.getElementById('bp-grid').innerHTML=renderBestPlays(best);
   document.getElementById('bp-section').style.display='block';
   buildBrief(results,best);
   document.getElementById('brief-section').style.display='block';
   document.getElementById('all-title').style.display='block';
-  document.getElementById('results').innerHTML=results.map(({stock,a},i)=>renderCard(stock,a,i)).join('');
-  results.forEach(({stock},i)=>populateExpDates(stock.t+i));
+  document.getElementById('all-title').textContent=`STRONG BUY & WATCH — ${positiveResults.length} ACTIONABLE PLAYS`;
+  document.getElementById('results').innerHTML=positiveResults.map(({stock,a},i)=>renderCard(stock,a,i,i===0)).join('');
+  positiveResults.forEach(({stock},i)=>setTimeout(()=>populateExpDates(stock.t+'_'+i),150));
 
   pw.style.display='none';
   dot.className='dot';
@@ -783,13 +793,14 @@ function populateExpDates(id){
   const dates=getExpirationDates();
   const today=new Date();
   sel.innerHTML='';
+  let defaultSet=false;
   dates.forEach(d=>{
     const dte=Math.round((d-today)/(1000*60*60*24));
     const label=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})+' ('+dte+'d)';
     const opt=document.createElement('option');
     opt.value=dte;
     opt.textContent=label;
-    if(dte>=28&&dte<=45&&sel.options.length>0&&!sel.value)opt.selected=true;
+    if(!defaultSet&&dte>=28&&dte<=50){opt.selected=true;defaultSet=true;}
     sel.appendChild(opt);
   });
 }
