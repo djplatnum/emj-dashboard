@@ -520,14 +520,16 @@ function buildBrief(results,plays){
 }
 
 // ── FULL STOCK CARD WITH ALL 5 TABS ────────────────────────────────────────
-function renderCard(stock,a,idx,isTopPlay=false){
+function renderCard(stock,a,idx){
   const id=stock.t+'_'+idx;
+  const isTopPlay=idx===0;
   const cs=a.changePct>=0?'+':'';
   const cc=a.changePct>=0?'up':'dn';
   const em=a.sigClass==='g'?'🟢':a.sigClass==='y'?'🟡':'🔴';
   const bc=a.sigClass==='g'?'var(--green)':a.sigClass==='y'?'var(--yellow)':'var(--red)';
   const vt=a.sigClass==='g'?'✅ GOOD TRADE SETUP — OPTIONS CHAIN CONFIRMS':a.sigClass==='y'?'⏳ PATTERN FORMING — WATCH BUT DO NOT ACT YET':'❌ SKIP THIS — CHAIN NOT FAVORABLE NOW';
-  const cardClass=isTopPlay?'card card-top-play':a.sigClass==='g'?'card card-strong':a.sigClass==='y'?'card card-watch':'card';
+  const cardClass=isTopPlay?'card card-strong':a.sigClass==='g'?'card card-strong':a.sigClass==='y'?'card card-watch':'card';
+  const p=a.pat;
   let badges=[];
   if(p.callWall)  badges.push('<span class="pb pb-cw">🟢 Call Wall</span>');
   if(p.putWall)   badges.push('<span class="pb pb-pw">🔴 Put Wall</span>');
@@ -548,10 +550,6 @@ function renderCard(stock,a,idx,isTopPlay=false){
     ['Review and Submit',`Confirm: ${stock.t}, ${a.optType}, strike $${a.target}, cost $${a.cost}. Tap <strong>Submit</strong>.`],
     ['Exit — Sell to Close',`${a.sellRec.split('.')[0]}. Go to your position and tap <strong>Sell to Close</strong>.`]
   ].map((s,i)=>`<div class="fid-step"><div class="snum">${i+1}</div><div class="stxt"><strong>${s[0]}</strong><span>${s[1]}</span></div></div>`).join('');
-
-  const cardClass=a.sigClass==='g'?'card card-strong':a.sigClass==='y'?'card card-watch':'card';
-
-  const p=a.pat;
 
   return `
 <div class="${cardClass}" style="animation-delay:${idx*0.04}s">
