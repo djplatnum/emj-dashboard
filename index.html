@@ -15,6 +15,7 @@
 body{background:var(--bg);color:var(--text);font-family:"DM Sans",system-ui;}
 .wrap{max-width:960px;margin:auto;padding:16px;}
 .header{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:14px;margin-bottom:14px;flex-wrap:wrap;}
+.logo-wrap{flex-shrink:0;filter:drop-shadow(0 2px 8px rgba(240,165,0,0.4));}
 .logo{background:linear-gradient(135deg,#f0a500,#e08800);color:#000;font-family:"Bebas Neue",sans-serif;font-size:24px;padding:8px 12px;border-radius:8px;flex-shrink:0;}
 .htext .title{font-size:18px;font-weight:700;color:var(--gold);}
 .htext .subtitle{font-size:11px;color:var(--muted);margin-top:2px;}
@@ -159,16 +160,33 @@ body{background:var(--bg);color:var(--text);font-family:"DM Sans",system-ui;}
 .dr-row .dvr{font-weight:700;color:var(--red);}
 .dr-footer{background:rgba(6,214,160,0.07);border:1px solid rgba(6,214,160,0.2);border-radius:7px;padding:8px 12px;font-size:11px;color:var(--green);font-weight:600;margin-top:10px;text-align:center;}
 .dr-card-footer{background:rgba(6,214,160,0.07);border:1px solid rgba(6,214,160,0.2);border-radius:0 0 12px 12px;padding:8px 18px;font-size:11px;color:var(--green);font-weight:600;text-align:center;}
-.calc-box{background:rgba(68,136,255,0.05);border:1px solid rgba(68,136,255,0.25);border-radius:10px;padding:14px;margin-top:12px;}
-.calc-title{font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px;}
-.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
-.calc-field{display:flex;flex-direction:column;gap:4px;}
-.calc-label{font-size:10px;color:var(--muted);font-weight:600;}
-.calc-input{background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:8px 10px;color:var(--text);font-size:13px;font-weight:700;outline:none;font-family:"DM Sans",system-ui;width:100%;}
+.calc-box{background:#0d1117;border:1px solid rgba(68,136,255,0.25);border-radius:14px;padding:18px;margin-top:14px;}
+.calc-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:16px;letter-spacing:0.3px;}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.calc-field{display:flex;flex-direction:column;gap:5px;}
+.calc-label{font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.7px;}
+.calc-input{background:#161d2e;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:10px 12px;color:var(--text);font-size:13px;font-weight:700;outline:none;font-family:"DM Sans",system-ui;width:100%;transition:border 0.2s;}
 .calc-input:focus{border-color:var(--blue);}
-.calc-btn{width:100%;background:linear-gradient(135deg,#4488ff,#2266dd);color:#fff;font-weight:800;font-size:13px;border:none;border-radius:8px;padding:10px;cursor:pointer;font-family:"DM Sans",system-ui;margin-bottom:10px;}
+.calc-btn{width:100%;background:linear-gradient(135deg,#4488ff,#2266dd);color:#fff;font-weight:800;font-size:13px;border:none;border-radius:10px;padding:12px;cursor:pointer;font-family:"DM Sans",system-ui;margin-bottom:14px;letter-spacing:0.3px;}
+.calc-btn:hover{opacity:0.9;}
 .calc-results{display:none;}
-.calc-result-title{font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;}
+.calc-result-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:14px;}
+.rh-summary{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+.rh-stat{background:#161d2e;border-radius:10px;padding:12px 14px;}
+.rh-stat-label{font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:4px;}
+.rh-stat-value{font-size:16px;font-weight:800;}
+.rh-decay{border-radius:8px;padding:10px 14px;font-size:11px;font-weight:600;margin-bottom:14px;}
+.rh-decay.safe{background:rgba(6,214,160,0.08);border:1px solid rgba(6,214,160,0.2);color:var(--green);}
+.rh-decay.warn{background:rgba(255,209,102,0.08);border:1px solid rgba(255,209,102,0.25);color:var(--yellow);}
+.rh-decay.danger{background:rgba(239,71,111,0.08);border:1px solid rgba(239,71,111,0.25);color:var(--red);}
+.rh-table{width:100%;border-collapse:collapse;margin-bottom:14px;}
+.rh-table th{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.7px;padding:8px 10px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.07);}
+.rh-table th:not(:first-child){text-align:right;}
+.rh-table td{padding:10px 10px;font-size:13px;font-weight:600;border-bottom:1px solid rgba(255,255,255,0.04);}
+.rh-table td:not(:first-child){text-align:right;}
+.rh-table tr:last-child td{border:none;}
+.rh-table tr.be-row td{background:rgba(255,209,102,0.05);color:var(--yellow);}
+.rh-table tr.curr-row td{background:rgba(68,136,255,0.07);}
 .cr-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:12px;}
 .cr-row:last-child{border:none;}
 .cr-row .cl{color:var(--muted);}
@@ -176,8 +194,8 @@ body{background:var(--bg);color:var(--text);font-family:"DM Sans",system-ui;}
 .cr-row .cv-r{font-weight:700;color:var(--red);}
 .cr-row .cv-y{font-weight:700;color:var(--yellow);}
 .cr-row .cv-b{font-weight:700;color:var(--blue);}
-.move-table{margin-top:10px;}
-.move-table-title{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:6px;}
+.move-table{display:none;}
+.move-table-title{display:none;}
 .move-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:11px;}
 .move-row.hdr{font-weight:700;color:var(--muted);font-size:10px;}
 .move-row .mc{text-align:center;}
@@ -188,7 +206,23 @@ body{background:var(--bg);color:var(--text);font-family:"DM Sans",system-ui;}
 <div class="wrap">
 
   <div class="header">
-    <div class="logo">SMS</div>
+    <div class="logo-wrap">
+      <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="52" height="52" rx="10" fill="url(#logoGrad)"/>
+        <polygon points="26,8 44,20 44,32 26,44 8,32 8,20" fill="none" stroke="#000" stroke-width="1.5" opacity="0.3"/>
+        <polygon points="26,13 40,21 40,31 26,39 12,31 12,21" fill="none" stroke="#f0a500" stroke-width="1" opacity="0.6"/>
+        <path d="M16 30 L22 24 L26 28 L30 20 L36 26" stroke="#06d6a0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="36" cy="26" r="2.5" fill="#06d6a0"/>
+        <circle cx="16" cy="30" r="2" fill="#f0a500"/>
+        <text x="26" y="49" font-family="Arial Black" font-size="6" font-weight="900" fill="#000" text-anchor="middle" opacity="0.7">SCANNER</text>
+        <defs>
+          <linearGradient id="logoGrad" x1="0" y1="0" x2="52" y2="52">
+            <stop offset="0%" stop-color="#f0a500"/>
+            <stop offset="100%" stop-color="#c07800"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
     <div class="htext">
       <div class="title">SMART MONEY SCANNER</div>
       <div class="subtitle">Institutional signals · Defined risk trades · Level the field</div>
@@ -604,24 +638,23 @@ function renderCard(stock,a,idx){
     </div>
     <div style="font-size:10px;color:var(--muted);line-height:1.6">Liquidity: <strong style="color:var(--gold)">${a.liq}</strong> · IV: <strong style="color:var(--yellow)">${a.iv}</strong> · SI: <strong style="color:var(--red)">${a.si}</strong><br>⚠️ Always verify actual premiums on Fidelity before placing any trade.</div>
     <div class="calc-box">
-      <div class="calc-title">🧮 Options P&L Calculator — Run Your Own Numbers</div>
+      <div class="calc-title">🧮 Options P&L Calculator</div>
       <div class="calc-grid">
-        <div class="calc-field"><label class="calc-label">Strike Price ($)</label><input class="calc-input" id="ci-strike-${id}" type="number" placeholder="${a.target.toFixed(2)}" value="${a.target.toFixed(2)}"></div>
-        <div class="calc-field"><label class="calc-label">Premium Paid ($)</label><input class="calc-input" id="ci-prem-${id}" type="number" placeholder="${a.cost}" value="${a.cost}"></div>
-        <div class="calc-field"><label class="calc-label">Contracts</label><input class="calc-input" id="ci-contracts-${id}" type="number" placeholder="1" value="1"></div>
-        <div class="calc-field"><label class="calc-label">Days To Expiration</label><input class="calc-input" id="ci-dte-${id}" type="number" placeholder="30" value="30"></div>
-        <div class="calc-field"><label class="calc-label">Current Stock Price ($)</label><input class="calc-input" id="ci-curr-${id}" type="number" placeholder="${a.price.toFixed(2)}" value="${a.price.toFixed(2)}"></div>
         <div class="calc-field"><label class="calc-label">Option Type</label><select class="calc-input" id="ci-type-${id}"><option value="CALL" ${a.optType==='CALL'?'selected':''}>CALL</option><option value="PUT" ${a.optType==='PUT'?'selected':''}>PUT</option></select></div>
+        <div class="calc-field"><label class="calc-label">Strike Price ($)</label><input class="calc-input" id="ci-strike-${id}" type="number" placeholder="${a.target.toFixed(2)}" value="${a.target.toFixed(2)}"></div>
+        <div class="calc-field"><label class="calc-label">Premium Paid (per share)</label><input class="calc-input" id="ci-prem-${id}" type="number" placeholder="${(a.cost/100).toFixed(2)}" value="${(a.cost/100).toFixed(2)}" step="0.01"></div>
+        <div class="calc-field"><label class="calc-label">Number of Contracts</label><input class="calc-input" id="ci-contracts-${id}" type="number" placeholder="1" value="1" min="1"></div>
+        <div class="calc-field"><label class="calc-label">Current Stock Price ($)</label><input class="calc-input" id="ci-curr-${id}" type="number" placeholder="${a.price.toFixed(2)}" value="${a.price.toFixed(2)}" step="0.01"></div>
+        <div class="calc-field"><label class="calc-label">Expiration Date</label><select class="calc-input" id="ci-exp-${id}"></select></div>
       </div>
       <button class="calc-btn" onclick="runCalc('${id}')">📊 CALCULATE P&L</button>
       <div class="calc-results" id="cr-${id}">
-        <div class="calc-result-title">📊 Your Trade Breakdown</div>
-        <div id="cr-rows-${id}"></div>
-        <div class="move-table">
-          <div class="move-table-title">Price Movement Scenarios</div>
-          <div class="move-row hdr"><span class="mc">Stock Price</span><span class="mc">Move</span><span class="mc">P&L</span></div>
-          <div id="cr-moves-${id}"></div>
-        </div>
+        <div class="calc-result-title">Trade Summary</div>
+        <div class="rh-summary" id="cr-summary-${id}"></div>
+        <div class="rh-decay" id="cr-decay-${id}"></div>
+        <div class="calc-result-title" style="margin-top:4px;">Price Scenarios</div>
+        <table class="rh-table"><thead><tr><th>Stock Price</th><th>Move</th><th>Contract Value</th><th>P&L</th><th>Return</th></tr></thead><tbody id="cr-moves-${id}"></tbody></table>
+        <div style="font-size:10px;color:var(--muted);margin-top:4px;">🛡️ Defined Risk — Max loss is total premium paid. Contract value shown at expiration (intrinsic only).</div>
       </div>
     </div>
   </div>
@@ -665,6 +698,7 @@ async function searchOne(){
   const live=await fetchLive(val);
   const a=buildAnalysis(val,live);
   document.getElementById('results').innerHTML=renderCard(wl,a,0);
+  populateExpDates(wl.t+'0');
   document.getElementById('searchInput').value='';
   ab.disabled=false;ab.textContent='ANALYZE';
 }
@@ -707,6 +741,7 @@ async function runScan(){
   document.getElementById('brief-section').style.display='block';
   document.getElementById('all-title').style.display='block';
   document.getElementById('results').innerHTML=results.map(({stock,a},i)=>renderCard(stock,a,i)).join('');
+  results.forEach(({stock},i)=>populateExpDates(stock.t+i));
 
   pw.style.display='none';
   dot.className='dot';
@@ -717,37 +752,109 @@ async function runScan(){
 
 window.addEventListener('load',()=>setTimeout(runScan,800));
 
+// ── EXPIRATION DATE BUILDER ─────────────────────────────────────────────────
+function getExpirationDates(){
+  const dates=[];
+  const today=new Date();
+  // Next 8 weekly Fridays
+  let d=new Date(today);
+  d.setDate(d.getDate()+(5-d.getDay()+7)%7||7);
+  for(let i=0;i<8;i++){
+    const nd=new Date(d);
+    dates.push(nd);
+    d.setDate(d.getDate()+7);
+  }
+  // Monthly expirations (3rd Friday) for next 12 months
+  for(let m=0;m<12;m++){
+    const base=new Date(today.getFullYear(),today.getMonth()+m+1,1);
+    let fri=new Date(base);
+    fri.setDate(1+(5-base.getDay()+7)%7+14);
+    if(!dates.find(x=>x.toDateString()===fri.toDateString())&&fri>today){
+      dates.push(fri);
+    }
+  }
+  dates.sort((a,b)=>a-b);
+  return dates;
+}
+
+function populateExpDates(id){
+  const sel=document.getElementById('ci-exp-'+id);
+  if(!sel)return;
+  const dates=getExpirationDates();
+  const today=new Date();
+  sel.innerHTML='';
+  dates.forEach(d=>{
+    const dte=Math.round((d-today)/(1000*60*60*24));
+    const label=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})+' ('+dte+'d)';
+    const opt=document.createElement('option');
+    opt.value=dte;
+    opt.textContent=label;
+    if(dte>=28&&dte<=45&&sel.options.length>0&&!sel.value)opt.selected=true;
+    sel.appendChild(opt);
+  });
+}
+
 function runCalc(id){
   const strike=parseFloat(document.getElementById('ci-strike-'+id).value)||0;
-  const prem=parseFloat(document.getElementById('ci-prem-'+id).value)||0;
+  const premPerShare=parseFloat(document.getElementById('ci-prem-'+id).value)||0;
   const contracts=parseInt(document.getElementById('ci-contracts-'+id).value)||1;
-  const dte=parseInt(document.getElementById('ci-dte-'+id).value)||30;
+  const expSel=document.getElementById('ci-exp-'+id);
+  const dte=expSel?parseInt(expSel.value)||30:30;
   const curr=parseFloat(document.getElementById('ci-curr-'+id).value)||0;
   const type=document.getElementById('ci-type-'+id).value;
-  if(!strike||!prem||!curr){alert('Please fill in all fields');return;}
-  const totalCost=prem*contracts;
-  const breakeven=type==='CALL'?strike+(prem/100):strike-(prem/100);
-  const intrinsic=type==='CALL'?Math.max(0,curr-strike):Math.max(0,strike-curr);
-  const timeDecayWarning=dte<=7?'⚠️ DANGER — Less than 7 days left. Time decay is destroying value fast.':dte<=14?'⚠️ WARNING — Under 2 weeks. Consider taking profits soon.':'✅ Healthy — Enough time for the trade to work.';
-  const rowsEl=document.getElementById('cr-rows-'+id);
-  const movesEl=document.getElementById('cr-moves-'+id);
-  rowsEl.innerHTML=`
-    <div class="pr-row"><span class="lbl">Total Cost (${contracts} contract${contracts>1?'s':''})</span><span class="val vr">$${totalCost.toLocaleString()}</span></div>
-    <div class="pr-row"><span class="lbl">Breakeven Price</span><span class="val vgold">$${breakeven.toFixed(2)}</span></div>
-    <div class="pr-row"><span class="lbl">Current Intrinsic Value</span><span class="val ${intrinsic>0?'vg':'vr'}">$${(intrinsic*100*contracts).toFixed(2)}</span></div>
-    <div class="pr-row"><span class="lbl">Max Loss (Worst Case)</span><span class="val vr">-$${totalCost.toLocaleString()} only</span></div>
-    <div class="pr-row"><span class="lbl">Days To Expiration</span><span class="val">${dte} days</span></div>
-    <div style="background:rgba(255,209,102,0.08);border:1px solid rgba(255,209,102,0.25);border-radius:7px;padding:8px 10px;font-size:11px;color:var(--yellow);margin:8px 0;">${timeDecayWarning}</div>
+  if(!strike||!premPerShare||!curr){alert('Please fill in all fields');return;}
+
+  const totalCost=Math.round(premPerShare*100*contracts);
+  const breakeven=type==='CALL'?(strike+premPerShare):(strike-premPerShare);
+  const intrinsicNow=type==='CALL'?Math.max(0,curr-strike):Math.max(0,strike-curr);
+  const currentValue=Math.round(intrinsicNow*100*contracts);
+  const currentPL=currentValue-totalCost;
+
+  // Summary cards
+  const summaryEl=document.getElementById('cr-summary-'+id);
+  summaryEl.innerHTML=`
+    <div class="rh-stat"><div class="rh-stat-label">Total Cost</div><div class="rh-stat-value" style="color:var(--red)">$${totalCost.toLocaleString()}</div></div>
+    <div class="rh-stat"><div class="rh-stat-label">Breakeven</div><div class="rh-stat-value" style="color:var(--yellow)">$${breakeven.toFixed(2)}</div></div>
+    <div class="rh-stat"><div class="rh-stat-label">Max Loss</div><div class="rh-stat-value" style="color:var(--red)">$${totalCost.toLocaleString()}</div></div>
+    <div class="rh-stat"><div class="rh-stat-label">Days Left</div><div class="rh-stat-value" style="color:${dte<=7?'var(--red)':dte<=21?'var(--yellow)':'var(--green)'}">${dte}d</div></div>
   `;
-  const moves=type==='CALL'
-    ?[[-20,-15,-10,-5,0,5,10,15,20,30].map(pct=>({pct,price:curr*(1+pct/100)}))]
-    :[[-30,-20,-15,-10,-5,0,5,10,15,20].map(pct=>({pct,price:curr*(1+pct/100)}))];
-  movesEl.innerHTML=moves[0].map(({pct,price})=>{
-    const iv=type==='CALL'?Math.max(0,price-strike):Math.max(0,strike-price);
-    const pl=((iv*100)-prem)*contracts;
-    const color=pl>0?'var(--green)':pl===0?'var(--yellow)':'var(--red)';
-    return `<div class="move-row"><span class="mc">$${price.toFixed(2)}</span><span class="mc" style="color:${pct>=0?'var(--green)':'var(--red)'}">${pct>=0?'+':''}${pct}%</span><span class="mc" style="color:${color};font-weight:700">${pl>=0?'+':''}$${pl.toFixed(0)}</span></div>`;
+
+  // Time decay warning
+  const decayEl=document.getElementById('cr-decay-'+id);
+  if(dte<=7){
+    decayEl.className='rh-decay danger';
+    decayEl.innerHTML='🚨 DANGER ZONE — '+dte+' days left. Theta is destroying premium daily. Exit or accept loss.';
+  } else if(dte<=21){
+    decayEl.className='rh-decay warn';
+    decayEl.innerHTML='⚠️ TIME WARNING — '+dte+' days left. Decay accelerating. Watch closely and consider taking profits.';
+  } else {
+    decayEl.className='rh-decay safe';
+    decayEl.innerHTML='✅ HEALTHY — '+dte+' days remaining. Enough time for the trade to develop.';
+  }
+
+  // Price scenario table — Robinhood style
+  const pcts=type==='CALL'?[-25,-20,-15,-10,-5,0,5,10,15,20,25,30,50]:[-50,-30,-25,-20,-15,-10,-5,0,5,10,15,20,25];
+  const movesEl=document.getElementById('cr-moves-'+id);
+  movesEl.innerHTML=pcts.map(pct=>{
+    const price=curr*(1+pct/100);
+    const intrinsic=type==='CALL'?Math.max(0,price-strike):Math.max(0,strike-price);
+    const contractVal=Math.round(intrinsic*100*contracts);
+    const pl=contractVal-totalCost;
+    const ret=totalCost>0?Math.round((pl/totalCost)*100):0;
+    const isBreakeven=Math.abs(price-breakeven)<0.50;
+    const isCurrent=Math.abs(price-curr)<curr*0.025;
+    const plColor=pl>0?'var(--green)':pl===0?'var(--yellow)':'var(--red)';
+    const moveColor=pct>0?'var(--green)':pct<0?'var(--red)':'var(--muted)';
+    const rowClass=isBreakeven?'be-row':isCurrent?'curr-row':'';
+    return `<tr class="${rowClass}">
+      <td style="color:var(--text)">$${price.toFixed(2)}${isBreakeven?' 🎯':isCurrent?' ◀ Now':''}</td>
+      <td style="color:${moveColor}">${pct>=0?'+':''}${pct}%</td>
+      <td style="color:var(--text)">$${contractVal.toLocaleString()}</td>
+      <td style="color:${plColor};font-weight:700">${pl>=0?'+':''}$${pl.toLocaleString()}</td>
+      <td style="color:${plColor}">${ret>=0?'+':''}${ret}%</td>
+    </tr>`;
   }).join('');
+
   document.getElementById('cr-'+id).style.display='block';
 }
 </script>
