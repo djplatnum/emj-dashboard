@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Smart Money Scanner — Level The Field</title>
+<meta name="description" content="Institutional options signals for everyday traders. Level the field.">
+<meta name="theme-color" content="#f0a500">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SM$ Scanner">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -202,7 +210,24 @@ body{background:var(--bg);color:var(--text);font-family:"DM Sans",system-ui;}
 .move-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:11px;}
 .move-row.hdr{font-weight:700;color:var(--muted);font-size:10px;}
 .move-row .mc{text-align:center;}
-@media(max-width:650px){.bp-grid{grid-template-columns:1fr;}.brief-stats{grid-template-columns:1fr 1fr;}.ev-grid{grid-template-columns:1fr;}}
+.lang-btn{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:var(--text);font-size:11px;font-weight:700;border-radius:6px;padding:5px 10px;cursor:pointer;font-family:"DM Sans",system-ui;transition:all 0.2s;}
+.lang-btn.active{background:var(--gold);color:#000;border-color:var(--gold);}
+.lang-row{display:flex;gap:6px;align-items:center;margin-left:8px;}
+.broker-section{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:14px;}
+.broker-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px;}
+.broker-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.broker-btn{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 8px;border-radius:10px;text-decoration:none;font-family:"DM Sans",system-ui;font-weight:700;font-size:11px;transition:all 0.2s;border:1px solid transparent;}
+.broker-btn:hover{transform:translateY(-1px);}
+.broker-tt{background:rgba(255,100,50,0.1);border-color:rgba(255,100,50,0.25);color:#ff6432;}
+.broker-wb{background:rgba(68,136,255,0.1);border-color:rgba(68,136,255,0.25);color:var(--blue);}
+.broker-rh{background:rgba(6,214,160,0.1);border-color:rgba(6,214,160,0.25);color:var(--green);}
+.broker-icon{font-size:20px;}
+.broker-sub{font-size:9px;color:var(--muted);font-weight:500;}
+.pwa-bar{background:linear-gradient(135deg,rgba(240,165,0,0.1),rgba(6,214,160,0.05));border:1px solid rgba(240,165,0,0.2);border-radius:10px;padding:10px 16px;margin-bottom:14px;display:none;align-items:center;gap:12px;}
+.pwa-bar.show{display:flex;}
+.pwa-bar-text{font-size:12px;color:var(--text);font-weight:600;flex:1;}
+.pwa-install-btn{background:linear-gradient(135deg,#f0a500,#e08800);color:#000;font-weight:800;font-size:11px;border:none;border-radius:7px;padding:7px 14px;cursor:pointer;white-space:nowrap;font-family:"DM Sans",system-ui;}
+@media(max-width:650px){.bp-grid{grid-template-columns:1fr;}.brief-stats{grid-template-columns:1fr 1fr;}.ev-grid{grid-template-columns:1fr;}.broker-grid{grid-template-columns:repeat(3,1fr);}}
 </style>
 </head>
 <body>
@@ -210,29 +235,26 @@ body{background:var(--bg);color:var(--text);font-family:"DM Sans",system-ui;}
 
   <div class="header">
     <div class="logo-wrap">
-      <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="52" height="52" rx="10" fill="url(#logoGrad)"/>
-        <polygon points="26,8 44,20 44,32 26,44 8,32 8,20" fill="none" stroke="#000" stroke-width="1.5" opacity="0.3"/>
-        <polygon points="26,13 40,21 40,31 26,39 12,31 12,21" fill="none" stroke="#f0a500" stroke-width="1" opacity="0.6"/>
-        <path d="M16 30 L22 24 L26 28 L30 20 L36 26" stroke="#06d6a0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <circle cx="36" cy="26" r="2.5" fill="#06d6a0"/>
-        <circle cx="16" cy="30" r="2" fill="#f0a500"/>
-        <text x="26" y="49" font-family="Arial Black" font-size="6" font-weight="900" fill="#000" text-anchor="middle" opacity="0.7">SCANNER</text>
-        <defs>
-          <linearGradient id="logoGrad" x1="0" y1="0" x2="52" y2="52">
-            <stop offset="0%" stop-color="#f0a500"/>
-            <stop offset="100%" stop-color="#c07800"/>
-          </linearGradient>
-        </defs>
+      <img src="logo.png" alt="SM$ Smart Money Scanner" style="width:56px;height:56px;border-radius:10px;object-fit:cover;filter:drop-shadow(0 2px 12px rgba(240,165,0,0.5));" onerror="this.style.display='none';document.getElementById('svg-logo').style.display='block';">
+      <svg id="svg-logo" style="display:none;" width="56" height="56" viewBox="0 0 56 56" fill="none">
+        <rect width="56" height="56" rx="11" fill="url(#lg2)"/>
+        <path d="M14 36 L21 26 L27 31 L32 20 L42 28" stroke="#06d6a0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="42" cy="28" r="3" fill="#06d6a0"/>
+        <text x="28" y="48" font-family="Arial Black" font-size="9" font-weight="900" fill="#000" text-anchor="middle" opacity="0.8">SM$</text>
+        <defs><linearGradient id="lg2" x1="0" y1="0" x2="56" y2="56"><stop offset="0%" stop-color="#f0a500"/><stop offset="100%" stop-color="#b06000"/></linearGradient></defs>
       </svg>
     </div>
     <div class="htext">
       <div class="title">SMART MONEY SCANNER</div>
-      <div class="subtitle">Institutional signals · Defined risk trades · Level the field</div>
+      <div class="subtitle" id="subtitle-text">Institutional signals · Defined risk trades · Level the field</div>
     </div>
-    <div class="hright">
+    <div class="hright" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
       <div class="clock" id="clock">--:--</div>
       <div class="dateline" id="dateline"></div>
+      <div class="lang-row">
+        <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+        <button class="lang-btn" onclick="setLang('es')" id="btn-es">ES</button>
+      </div>
     </div>
   </div>
 
@@ -240,6 +262,32 @@ body{background:var(--bg);color:var(--text);font-family:"DM Sans",system-ui;}
     <div class="dot" id="dot"></div>
     <div class="stext" id="stext">Ready — tap Auto Morning Scan to find today's best plays</div>
     <button class="btn-auto" id="btn-auto" onclick="runScan()">⚡ AUTO MORNING SCAN</button>
+  </div>
+
+  <div class="pwa-bar" id="pwa-bar">
+    <div class="pwa-bar-text" id="pwa-text">📱 Install Smart Money Scanner on your phone — trade faster, scan smarter.</div>
+    <button class="pwa-install-btn" id="pwa-install-btn">Install App</button>
+  </div>
+
+  <div class="broker-section">
+    <div class="broker-title" id="broker-title">🏦 Open A Trading Account — Start Trading Today</div>
+    <div class="broker-grid">
+      <a class="broker-btn broker-tt" href="https://tastytrade.com" target="_blank">
+        <span class="broker-icon">🌶️</span>
+        <span>tastytrade</span>
+        <span class="broker-sub" id="broker-sub-tt">Best for options</span>
+      </a>
+      <a class="broker-btn broker-wb" href="https://webull.com" target="_blank">
+        <span class="broker-icon">📈</span>
+        <span>Webull</span>
+        <span class="broker-sub" id="broker-sub-wb">Commission free</span>
+      </a>
+      <a class="broker-btn broker-rh" href="https://robinhood.com" target="_blank">
+        <span class="broker-icon">🪶</span>
+        <span>Robinhood</span>
+        <span class="broker-sub" id="broker-sub-rh">Easy to start</span>
+      </a>
+    </div>
   </div>
 
   <div id="prog-wrap">
@@ -865,6 +913,102 @@ function runCalc(id){
   }).join('');
 
   document.getElementById('cr-'+id).style.display='block';
+}
+
+// ── LANGUAGE SYSTEM ─────────────────────────────────────────────────────────
+const TRANSLATIONS = {
+  en: {
+    title: 'SMART MONEY SCANNER',
+    subtitle: 'Institutional signals · Defined risk trades · Level the field',
+    scanBtn: '⚡ AUTO MORNING SCAN',
+    readyText: 'Ready — tap Auto Morning Scan to find today\'s best plays',
+    searchPlaceholder: '🔍 Search any ticker (GME, PLTR, PYPL...)',
+    analyzeBtn: 'ANALYZE',
+    rescanBtn: '🔄 RESCAN ALL',
+    bestPlaysHdr: '⚡ TODAY\'S BEST PLAYS — AI Selected Top 3',
+    brokerTitle: '🏦 Open A Trading Account — Start Trading Today',
+    brokerSubTT: 'Best for options',
+    brokerSubWB: 'Commission free',
+    brokerSubRH: 'Easy to start',
+    pwaText: '📱 Install Smart Money Scanner on your phone — trade faster, scan smarter.',
+    pwaBtn: 'Install App',
+    footer: '⚠️ Educational tool only — not financial advice. Options trading involves significant risk. Always paper trade first.',
+    scanComplete: 'Scan complete'
+  },
+  es: {
+    title: 'SMART MONEY SCANNER',
+    subtitle: 'Señales institucionales · Riesgo definido · Nivela el campo',
+    scanBtn: '⚡ ESCANEO MATUTINO',
+    readyText: 'Listo — toca Escaneo Matutino para encontrar las mejores jugadas de hoy',
+    searchPlaceholder: '🔍 Buscar ticker (GME, PLTR, PYPL...)',
+    analyzeBtn: 'ANALIZAR',
+    rescanBtn: '🔄 REESCANEAR',
+    bestPlaysHdr: '⚡ MEJORES JUGADAS DE HOY — Top 3 Seleccionados por IA',
+    brokerTitle: '🏦 Abre Una Cuenta de Trading — Empieza a Operar Hoy',
+    brokerSubTT: 'Mejor para opciones',
+    brokerSubWB: 'Sin comisiones',
+    brokerSubRH: 'Fácil de empezar',
+    pwaText: '📱 Instala Smart Money Scanner en tu teléfono — opera más rápido.',
+    pwaBtn: 'Instalar App',
+    footer: '⚠️ Solo herramienta educativa — no es asesoramiento financiero. Las opciones implican riesgo significativo.',
+    scanComplete: 'Escaneo completo'
+  }
+};
+
+let currentLang = 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  const t = TRANSLATIONS[lang];
+  document.getElementById('btn-en').className = lang==='en'?'lang-btn active':'lang-btn';
+  document.getElementById('btn-es').className = lang==='es'?'lang-btn active':'lang-btn';
+  document.getElementById('subtitle-text').textContent = t.subtitle;
+  document.getElementById('btn-auto').textContent = t.scanBtn;
+  document.getElementById('btn-scan').textContent = t.rescanBtn;
+  document.getElementById('btn-analyze').textContent = t.analyzeBtn;
+  document.getElementById('searchInput').placeholder = t.searchPlaceholder;
+  document.getElementById('broker-title').textContent = t.brokerTitle;
+  document.getElementById('broker-sub-tt').textContent = t.brokerSubTT;
+  document.getElementById('broker-sub-wb').textContent = t.brokerSubWB;
+  document.getElementById('broker-sub-rh').textContent = t.brokerSubRH;
+  const pwaText = document.getElementById('pwa-text');
+  if(pwaText) pwaText.textContent = t.pwaText;
+  const pwaBtn = document.getElementById('pwa-install-btn');
+  if(pwaBtn) pwaBtn.textContent = t.pwaBtn;
+  document.querySelector('.footer').textContent = t.footer;
+  const bpHdr = document.getElementById('bp-section')?.querySelector('.bp-hdr');
+  if(bpHdr) bpHdr.textContent = t.bestPlaysHdr;
+  document.documentElement.lang = lang;
+}
+
+// ── PWA INSTALL ──────────────────────────────────────────────────────────────
+let deferredPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('pwa-bar').classList.add('show');
+});
+
+document.getElementById('pwa-install-btn').addEventListener('click', async () => {
+  if(!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  if(outcome === 'accepted') {
+    document.getElementById('pwa-bar').classList.remove('show');
+  }
+  deferredPrompt = null;
+});
+
+window.addEventListener('appinstalled', () => {
+  document.getElementById('pwa-bar').classList.remove('show');
+});
+
+// Register service worker
+if('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
+  });
 }
 </script>
 </body>
