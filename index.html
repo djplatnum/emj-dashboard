@@ -234,6 +234,51 @@ body{background:var(--bg);color:var(--text);font-family:"DM Sans",system-ui;}
 .pwa-bar-text{font-size:12px;color:var(--text);font-weight:600;flex:1;}
 .pwa-install-btn{background:linear-gradient(135deg,#f0a500,#e08800);color:#000;font-weight:800;font-size:11px;border:none;border-radius:7px;padding:7px 14px;cursor:pointer;white-space:nowrap;font-family:"DM Sans",system-ui;}
 @media(max-width:650px){.bp-grid{grid-template-columns:1fr;}.brief-stats{grid-template-columns:1fr 1fr;}.ev-grid{grid-template-columns:1fr;}.broker-grid{grid-template-columns:repeat(3,1fr);}}
+
+/* ── PAYWALL ─────────────────────────────────────────────────────────────── */
+.paywall-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(7,9,15,0.97);backdrop-filter:blur(12px);overflow-y:auto;}
+.paywall-overlay.show{display:flex;align-items:flex-start;justify-content:center;padding:20px 16px 60px;}
+.paywall-box{width:100%;max-width:560px;margin-top:20px;}
+.pw-header{text-align:center;margin-bottom:28px;}
+.pw-logo{background:linear-gradient(135deg,#f0a500,#b06000);color:#000;font-family:"Bebas Neue",sans-serif;font-size:28px;padding:10px 18px;border-radius:10px;display:inline-block;margin-bottom:16px;}
+.pw-title{font-family:"Bebas Neue",sans-serif;font-size:36px;color:var(--gold);letter-spacing:1px;line-height:1.1;margin-bottom:8px;}
+.pw-sub{font-size:13px;color:var(--muted);line-height:1.6;max-width:400px;margin:0 auto;}
+.pw-trial-badge{display:inline-block;background:rgba(6,214,160,0.1);border:1px solid rgba(6,214,160,0.3);border-radius:20px;padding:5px 16px;font-size:11px;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:0.8px;margin:12px 0;}
+.pw-days{font-family:"Bebas Neue",sans-serif;font-size:56px;color:var(--gold);line-height:1;}
+.pw-days-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:20px;}
+.pw-features{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:20px;}
+.pw-features-title{font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px;}
+.pw-feature{display:flex;align-items:center;gap:10px;padding:5px 0;font-size:12px;color:var(--text);}
+.pw-feature-icon{color:var(--green);font-size:14px;flex-shrink:0;}
+.pw-plans{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
+.pw-plan{background:var(--surface);border:2px solid var(--border);border-radius:14px;padding:16px 12px;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;}
+.pw-plan:hover{border-color:var(--gold);}
+.pw-plan.selected{border-color:var(--gold);background:rgba(240,165,0,0.06);}
+.pw-plan.popular{border-color:rgba(240,165,0,0.4);}
+.pw-popular-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#f0a500,#e08800);color:#000;font-size:9px;font-weight:800;padding:3px 10px;border-radius:10px;white-space:nowrap;text-transform:uppercase;}
+.pw-plan-name{font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;}
+.pw-plan-price{font-family:"Bebas Neue",sans-serif;font-size:28px;color:var(--gold);line-height:1;}
+.pw-plan-period{font-size:10px;color:var(--muted);margin-bottom:4px;}
+.pw-plan-save{font-size:10px;font-weight:800;color:var(--green);}
+.pw-cta{width:100%;background:linear-gradient(135deg,#f0a500,#e08800);color:#000;font-weight:800;font-size:15px;border:none;border-radius:12px;padding:16px;cursor:pointer;font-family:"DM Sans",system-ui;margin-bottom:10px;letter-spacing:0.3px;}
+.pw-cta:hover{opacity:0.92;}
+.pw-paypal{width:100%;background:#003087;color:#fff;font-weight:800;font-size:13px;border:none;border-radius:12px;padding:13px;cursor:pointer;font-family:"DM Sans",system-ui;margin-bottom:16px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.pw-paypal:hover{background:#002070;}
+.pw-guarantee{text-align:center;font-size:11px;color:var(--muted);line-height:1.7;}
+.pw-guarantee strong{color:var(--text);}
+.pw-dismiss{display:block;text-align:center;margin-top:16px;font-size:11px;color:var(--muted);cursor:pointer;text-decoration:underline;}
+.pw-progress{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:20px;text-align:center;}
+.pw-progress-title{font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px;}
+.pw-bar-bg{background:rgba(255,255,255,0.06);border-radius:20px;height:8px;overflow:hidden;margin-bottom:6px;}
+.pw-bar-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--green),var(--gold));}
+.pw-bar-label{font-size:10px;color:var(--muted);display:flex;justify-content:space-between;}
+
+/* Trial counter banner */
+.trial-banner{background:linear-gradient(135deg,rgba(240,165,0,0.08),rgba(6,214,160,0.04));border:1px solid rgba(240,165,0,0.2);border-radius:10px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px;cursor:pointer;}
+.trial-banner-text{font-size:12px;color:var(--text);flex:1;}
+.trial-banner-days{font-family:"Bebas Neue",sans-serif;font-size:20px;color:var(--gold);flex-shrink:0;}
+.trial-banner-cta{background:linear-gradient(135deg,#f0a500,#e08800);color:#000;font-size:10px;font-weight:800;border:none;border-radius:6px;padding:5px 12px;cursor:pointer;font-family:"DM Sans",system-ui;white-space:nowrap;flex-shrink:0;}
+
 </style>
 </head>
 <body>
@@ -273,6 +318,13 @@ body{background:var(--bg);color:var(--text);font-family:"DM Sans",system-ui;}
   <div class="pwa-bar" id="pwa-bar">
     <div class="pwa-bar-text" id="pwa-text">📱 Install Smart Money Scanner on your phone — trade faster, scan smarter.</div>
     <button class="pwa-install-btn" id="pwa-install-btn">Install App</button>
+  </div>
+
+  <!-- Trial Banner -->
+  <div class="trial-banner" id="trial-banner" onclick="showPaywall()" style="display:none;">
+    <div class="trial-banner-days" id="trial-days-display">30</div>
+    <div class="trial-banner-text" id="trial-banner-text">days left in your free trial · Upgrade to keep full access</div>
+    <button class="trial-banner-cta">UPGRADE →</button>
   </div>
 
   <div class="broker-section">
@@ -1365,6 +1417,239 @@ if('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(()=>{});
   });
 }
+</script>
+<!-- PAYWALL OVERLAY -->
+<div class="paywall-overlay" id="paywall-overlay">
+  <div class="paywall-box">
+    <div class="pw-header">
+      <div class="pw-logo">SM$</div>
+      <div class="pw-title">Your Free Trial<br>Has Ended</div>
+      <div class="pw-sub">You have been using Smart Money Scanner to level the field. Keep your edge with a subscription.</div>
+      <div class="pw-trial-badge">✅ 30 Days Free · No Credit Card Required</div>
+    </div>
+
+    <div class="pw-progress">
+      <div class="pw-progress-title">Your Free Trial Period</div>
+      <div class="pw-bar-bg"><div class="pw-bar-fill" id="pw-bar-fill" style="width:100%"></div></div>
+      <div class="pw-bar-label"><span>Day 1</span><span id="pw-bar-day">Day 30</span><span>Day 30</span></div>
+    </div>
+
+    <div class="pw-features">
+      <div class="pw-features-title">Everything Included In Your Subscription</div>
+      <div class="pw-feature"><span class="pw-feature-icon">🐋</span>Real whale flow detection — Massive.com institutional data</div>
+      <div class="pw-feature"><span class="pw-feature-icon">⚡</span>Daily AI scan — 20 stocks ranked best to worst</div>
+      <div class="pw-feature"><span class="pw-feature-icon">📊</span>6-Step whale filter — real options chain analysis</div>
+      <div class="pw-feature"><span class="pw-feature-icon">🎓</span>Professor Tutor — 10 lessons from beginner to advanced</div>
+      <div class="pw-feature"><span class="pw-feature-icon">🔄</span>The Wheel Strategy — cash secured puts and covered calls</div>
+      <div class="pw-feature"><span class="pw-feature-icon">🦋</span>The Flyagonal — Steve Ganz 96% win rate strategy</div>
+      <div class="pw-feature"><span class="pw-feature-icon">💰</span>Wealth Builder — compounding projector and income tracker</div>
+      <div class="pw-feature"><span class="pw-feature-icon">🌎</span>Full bilingual — English and Spanish</div>
+    </div>
+
+    <div class="pw-plans" id="pw-plans">
+      <div class="pw-plan" id="plan-monthly" onclick="selectPlan('monthly')">
+        <div class="pw-plan-name">Monthly</div>
+        <div class="pw-plan-price">$9<span style="font-size:16px">.99</span></div>
+        <div class="pw-plan-period">per month</div>
+        <div class="pw-plan-save" style="color:var(--muted);">Flexible</div>
+      </div>
+      <div class="pw-plan popular selected" id="plan-quarterly" onclick="selectPlan('quarterly')">
+        <div class="pw-popular-badge">⭐ BEST VALUE</div>
+        <div class="pw-plan-name">Quarterly</div>
+        <div class="pw-plan-price">$24<span style="font-size:16px">.99</span></div>
+        <div class="pw-plan-period">every 3 months</div>
+        <div class="pw-plan-save">Save 17%</div>
+      </div>
+      <div class="pw-plan" id="plan-annual" onclick="selectPlan('annual')">
+        <div class="pw-plan-name">Annual</div>
+        <div class="pw-plan-price">$79<span style="font-size:16px">.99</span></div>
+        <div class="pw-plan-period">per year</div>
+        <div class="pw-plan-save">Save 33%</div>
+      </div>
+    </div>
+
+    <button class="pw-cta" id="pw-cta-btn" onclick="handleStripeCheckout()">
+      ⚡ START WITH CARD — STRIPE SECURE CHECKOUT
+    </button>
+
+    <button class="pw-paypal" onclick="handlePayPalCheckout()">
+      <span style="font-size:18px;">🅿</span> Pay with PayPal
+    </button>
+
+    <div class="pw-guarantee">
+      <strong>🔒 Secure checkout · Cancel anytime · No hidden fees</strong><br>
+      Processed by Stripe (Visa, Mastercard, Amex, Apple Pay, Google Pay, Cash App Pay)<br>
+      or PayPal. Your card info is never stored by Smart Money Scanner.
+    </div>
+
+    <span class="pw-dismiss" onclick="dismissPaywall()">
+      I understand I will lose access — dismiss for now
+    </span>
+  </div>
+</div>
+
+<script>
+// ── PAYWALL SYSTEM ──────────────────────────────────────────────────────────
+const TRIAL_DAYS = 30;
+const PLANS = {
+  monthly:   { name: 'Monthly',   price: '$9.99/month',   amount: 999,  stripe_price: 'price_monthly_placeholder' },
+  quarterly: { name: 'Quarterly', price: '$24.99/3 months', amount: 2499, stripe_price: 'price_quarterly_placeholder' },
+  annual:    { name: 'Annual',    price: '$79.99/year',   amount: 7999, stripe_price: 'price_annual_placeholder' }
+};
+
+let selectedPlan = 'quarterly';
+
+function initTrial() {
+  // Get or set trial start date
+  let startDate = localStorage.getItem('sms_trial_start');
+  if (!startDate) {
+    startDate = new Date().toISOString().split('T')[0];
+    localStorage.setItem('sms_trial_start', startDate);
+  }
+
+  // Check if user has active subscription token
+  const token = localStorage.getItem('sms_subscription_token');
+  if (token && validateToken(token)) return; // Paid user — skip paywall
+
+  // Calculate days remaining
+  const start = new Date(startDate);
+  const today = new Date();
+  const daysUsed = Math.floor((today - start) / (1000*60*60*24));
+  const daysLeft = Math.max(0, TRIAL_DAYS - daysUsed);
+  const pct = Math.round((daysUsed / TRIAL_DAYS) * 100);
+
+  // Update trial banner
+  const banner = document.getElementById('trial-banner');
+  const bannerDays = document.getElementById('trial-days-display');
+  const bannerText = document.getElementById('trial-banner-text');
+
+  if (daysLeft <= 0) {
+    // Trial expired — show paywall
+    showPaywall();
+  } else if (daysLeft <= 7) {
+    // Last 7 days — show urgent banner
+    banner.style.display = 'flex';
+    banner.style.borderColor = 'rgba(239,71,111,0.4)';
+    bannerDays.style.color = 'var(--red)';
+    bannerDays.textContent = daysLeft;
+    bannerText.textContent = `days left in your free trial · Upgrade now to keep access`;
+  } else if (daysLeft <= 14) {
+    // Last 14 days — show banner
+    banner.style.display = 'flex';
+    bannerDays.textContent = daysLeft;
+    bannerText.textContent = `days left in your free trial · Upgrade to keep full access`;
+  }
+
+  // Update paywall progress bar
+  document.getElementById('pw-bar-fill').style.width = Math.min(pct, 100) + '%';
+  document.getElementById('pw-bar-day').textContent = `Day ${daysUsed}`;
+}
+
+function validateToken(token) {
+  // Basic token validation — checks expiry date encoded in token
+  try {
+    const parts = token.split('_');
+    if (parts.length < 3) return false;
+    const expiry = parseInt(parts[2]);
+    return expiry > Date.now();
+  } catch(e) { return false; }
+}
+
+function showPaywall() {
+  document.getElementById('paywall-overlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function hidePaywall() {
+  document.getElementById('paywall-overlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function dismissPaywall() {
+  hidePaywall();
+  // Give 24 hour grace period
+  localStorage.setItem('sms_paywall_dismissed', Date.now() + (24*60*60*1000));
+}
+
+function selectPlan(plan) {
+  selectedPlan = plan;
+  document.querySelectorAll('.pw-plan').forEach(el => el.classList.remove('selected'));
+  document.getElementById('plan-' + plan).classList.add('selected');
+  const p = PLANS[plan];
+  document.getElementById('pw-cta-btn').textContent = `⚡ GET ${p.name.toUpperCase()} — ${p.price.toUpperCase()} · STRIPE SECURE`;
+}
+
+async function handleStripeCheckout() {
+  const plan = PLANS[selectedPlan];
+  const btn = document.getElementById('pw-cta-btn');
+  btn.textContent = 'Opening secure checkout...';
+  btn.disabled = true;
+
+  // When Stripe is set up, replace this URL with your actual Stripe Payment Link
+  // For now shows instructions
+  const stripeLinks = {
+    monthly:   'https://buy.stripe.com/REPLACE_WITH_MONTHLY_LINK',
+    quarterly: 'https://buy.stripe.com/REPLACE_WITH_QUARTERLY_LINK',
+    annual:    'https://buy.stripe.com/REPLACE_WITH_ANNUAL_LINK'
+  };
+
+  const link = stripeLinks[selectedPlan];
+  if (link.includes('REPLACE')) {
+    alert('Stripe checkout coming soon! Set up your Stripe account at stripe.com and replace the payment links in the code.');
+    btn.textContent = `⚡ GET ${plan.name.toUpperCase()} — ${plan.price.toUpperCase()} · STRIPE SECURE`;
+    btn.disabled = false;
+    return;
+  }
+
+  window.open(link, '_blank');
+  btn.textContent = `⚡ GET ${plan.name.toUpperCase()} — ${plan.price.toUpperCase()} · STRIPE SECURE`;
+  btn.disabled = false;
+}
+
+function handlePayPalCheckout() {
+  // Replace with actual PayPal subscription button links
+  const paypalLinks = {
+    monthly:   'https://www.paypal.com/REPLACE_WITH_MONTHLY_LINK',
+    quarterly: 'https://www.paypal.com/REPLACE_WITH_QUARTERLY_LINK',
+    annual:    'https://www.paypal.com/REPLACE_WITH_ANNUAL_LINK'
+  };
+
+  const link = paypalLinks[selectedPlan];
+  if (link.includes('REPLACE')) {
+    alert('PayPal checkout coming soon! Set up your PayPal subscription buttons at paypal.com and replace the links in the code.');
+    return;
+  }
+  window.open(link, '_blank');
+}
+
+// Grant access after successful payment
+// Call this function with token from Stripe webhook or PayPal IPN
+function grantAccess(durationDays) {
+  const expiry = Date.now() + (durationDays * 24 * 60 * 60 * 1000);
+  const token = `sms_paid_${Date.now()}_${expiry}`;
+  localStorage.setItem('sms_subscription_token', token);
+  hidePaywall();
+  document.getElementById('trial-banner').style.display = 'none';
+  alert('✅ Welcome to Smart Money Scanner Premium! Level the field. 🫡');
+}
+
+// Check URL for success token after payment
+function checkPaymentReturn() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('payment') === 'success') {
+    const plan = params.get('plan') || 'monthly';
+    const days = plan === 'annual' ? 365 : plan === 'quarterly' ? 90 : 30;
+    grantAccess(days);
+    // Clean URL
+    window.history.replaceState({}, '', window.location.pathname);
+  }
+}
+
+// Initialize on load
+window.addEventListener('load', () => {
+  checkPaymentReturn();
+  setTimeout(initTrial, 1200); // Small delay so app loads first
+});
 </script>
 </body>
 </html>
