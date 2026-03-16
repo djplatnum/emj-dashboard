@@ -396,15 +396,14 @@ body{background:var(--bg);color:var(--text);font-family:"DM Sans",system-ui;}
 const FINNHUB_KEY = 'd6kk659r01qg51f495a0d6kk659r01qg51f495ag';
 const MASSIVE_KEY = 'c4QBhl4pM1CQpLKAtvN1eS2_bM0p1UDj'; // Upgrade to paid plan later
 // ── MARKETDATA.APP — FREE OPTIONS CHAIN (100 calls/day, greeks + IV + OI) ───
-const MARKETDATA_TOKEN = 'cjA3U1o3T28tTUIPUUJCOEY5ZWIEZmRQTkdZeXg2ZDIlQm5BWFU3ZnNqaz0';
+const MARKETDATA_TOKEN = 'UzdXZExLbGNjM0ZoV3pQTGpPNXM4Q2kybzRzMWtYZlo3RFBrcE1ScVBGST0';
 
 const whaleLog = {}; // tracks reason per ticker
 
 async function fetchOptionsChain(ticker) {
   try {
-    // Token in URL param — MarketData.app supports both header and URL param
-    // URL param avoids CORS preflight issues in browser environments
-    const url = `https://api.marketdata.app/v1/options/chain/${ticker}/?dte=38&strikeLimit=10&token=${MARKETDATA_TOKEN}`;
+    // encodeURIComponent handles the = sign at end of token
+    const url = `https://api.marketdata.app/v1/options/chain/${ticker}/?dte=38&strikeLimit=10&token=${encodeURIComponent(MARKETDATA_TOKEN)}`;
     const r = await fetch(url);
     if (!r.ok) {
       let errDetail = '';
