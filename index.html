@@ -402,14 +402,18 @@ const whaleLog = {}; // tracks reason per ticker
 
 async function fetchOptionsChain(ticker) {
   try {
-    // dte=38 targets ~38 days out · strikeLimit=10 keeps request lean (1 credit per ticker)
+    // Token in URL param — MarketData.app supports both header and URL param
+    // URL param avoids CORS preflight issues in browser environments
     const url = `https://api.marketdata.app/v1/options/chain/${ticker}/?dte=38&strikeLimit=10&token=${MARKETDATA_TOKEN}`;
     const r = await fetch(url);
     if (!r.ok) {
-      whaleLog[ticker] = r.status===401 ? 'MarketData token invalid — check token at marketdata.app' :
+      let errDetail = '';
+      try { const ej = await r.json(); errDetail = ej.errmsg || ej.message || ''; } catch(x){}
+      whaleLog[ticker] = r.status===401 ? `MarketData 401 — token rejected (${errDetail||'check token at marketdata.app'})` :
+                         r.status===403 ? `MarketData 403 — access denied (${errDetail})` :
                          r.status===429 ? 'Daily limit reached (100/day free) — resets 9:30am ET' :
                          r.status===404 ? 'Ticker not found in options data' :
-                         `MarketData API error ${r.status}`;
+                         `MarketData API error ${r.status} ${errDetail}`;
       return null;
     }
     const d = await r.json();
