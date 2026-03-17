@@ -1126,6 +1126,142 @@ function renderCard(stock,a,idx){
   </div>
 
   <div class="tc" id="tc-profit-${id}">
+
+    <!-- AI STRATEGY GUIDE -->
+    <div style="background:linear-gradient(135deg,rgba(240,165,0,0.08),rgba(6,214,160,0.04));border:1px solid rgba(240,165,0,0.25);border-radius:12px;padding:16px 18px;margin-bottom:14px;">
+      <div style="font-size:11px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px;">🤖 ${L?'CÓMO USA LA IA ESTE SCANNER PARA ENCONTRAR JUGADAS':'HOW THE AI USES THIS SCANNER TO FIND PLAYS'}</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
+        <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:10px;">
+          <div style="font-size:10px;font-weight:800;color:var(--green);margin-bottom:4px;">✅ ${L?'PASO 1 — ESCANEO':'STEP 1 — SCAN'}</div>
+          <div style="font-size:10px;color:var(--muted);line-height:1.6;">${L?'La IA escanea 20 acciones buscando señales institucionales — volumen inusual, patrones de opciones, actividad de ballenas.':'The AI scans 20 stocks looking for institutional signals — unusual volume, options patterns, whale activity.'}</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:10px;">
+          <div style="font-size:10px;font-weight:800;color:var(--blue);margin-bottom:4px;">🐋 ${L?'PASO 2 — FILTRO BALLENA':'STEP 2 — WHALE FILTER'}</div>
+          <div style="font-size:10px;color:var(--muted);line-height:1.6;">${L?'6 pasos verifican: flujo institucional real, alineación SMA, rango IV, eventos binarios, strike seguro, riesgo/retorno 2x.':'6 steps verify: real institutional flow, SMA alignment, IV rank, binary events, safer strike, 2x risk/reward.'}</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:10px;">
+          <div style="font-size:10px;font-weight:800;color:var(--gold);margin-bottom:4px;">🎯 ${L?'PASO 3 — STRIKE SEGURO':'STEP 3 — SAFER STRIKE'}</div>
+          <div style="font-size:10px;color:var(--muted);line-height:1.6;">${L?'La IA elige strikes con delta 0.20–0.30. Cerca del dinero, no demasiado lejos. El breakeven debe estar dentro del 15% del precio actual.':'The AI picks strikes with delta 0.20–0.30. Near the money, not too far. Breakeven should be within 15% of current price.'}</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:10px;">
+          <div style="font-size:10px;font-weight:800;color:var(--green);margin-bottom:4px;">💰 ${L?'PASO 4 — GESTIÓN':'STEP 4 — MANAGEMENT'}</div>
+          <div style="font-size:10px;color:var(--muted);line-height:1.6;">${L?'Entra con 1 contrato primero. Si sube 50-100% — vende. Nunca pierdas más del costo de la prima. La disciplina es la ventaja.':'Enter with 1 contract first. If it doubles — sell. Never lose more than the premium cost. Discipline is the edge.'}</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(6,214,160,0.06);border:1px solid rgba(6,214,160,0.2);border-radius:8px;padding:10px;">
+        <div style="font-size:10px;font-weight:800;color:var(--green);margin-bottom:6px;">🎓 ${L?'LA META DEL SCANNER — NIVELA EL CAMPO':'THE SCANNER GOAL — LEVEL THE FIELD'}</div>
+        <div style="font-size:10px;color:var(--muted);line-height:1.7;">${L?
+          `Esta herramienta usa los mismos datos que las instituciones. El objetivo <strong style="color:var(--text)">no es ganar cada trade</strong> — es hacer <strong style="color:var(--green)">jugadas con alta probabilidad, riesgo definido, y buena relación riesgo/retorno</strong>. 1 contrato, prima pequeña, sin margen, sin sorpresas. Si la señal falla, pierdes solo la prima. Si funciona, multiplicas.` :
+          `This tool uses the same data as institutions. The goal is <strong style="color:var(--text)">not to win every trade</strong> — it is to make <strong style="color:var(--green)">high-probability plays with defined risk and good risk/reward</strong>. 1 contract, small premium, no margin, no surprises. If the signal fails, you lose only the premium. If it works, you multiply.`
+        }</div>
+      </div>
+
+      <div style="margin-top:10px;padding:8px 10px;background:rgba(239,71,111,0.06);border:1px solid rgba(239,71,111,0.2);border-radius:8px;font-size:10px;color:var(--muted);line-height:1.6;">
+        ⚠️ <strong style="color:var(--yellow);">${L?'REGLA DE ORO':'GOLDEN RULE'}</strong> — ${L?
+          'Antes de entrar verifica: ¿El breakeven está dentro del 15% del precio actual? ¿Tienes 30-45 días? ¿No hay ganancias en 14 días? ¿El strike tiene delta 0.20–0.30? Si no — espera la próxima señal.' :
+          'Before entering verify: Is breakeven within 15% of current price? Do you have 30-45 days? No earnings in 14 days? Is strike delta 0.20–0.30? If not — wait for the next signal.'}
+      </div>
+    </div>
+
+    <!-- 3 AI PLAYS FOR THIS STOCK -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:14px;">
+      <div style="font-size:11px;font-weight:800;color:var(--text);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px;">🤖 ${L?'3 JUGADAS DE IA PARA':'3 AI PLAYS FOR'} ${stock.t} — ${L?'ELIGE TU ESTILO':'PICK YOUR STYLE'}</div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:14px;">${L?'La IA calculó estas 3 jugadas basadas en el precio actual de $'+a.price.toFixed(2)+'. Abre tu broker, busca el strike, verifica la prima y ejecuta.':'The AI calculated these 3 plays based on current price of $'+a.price.toFixed(2)+'. Open your broker, find the strike, verify the premium and execute.'}</div>
+
+      <!-- CONSERVATIVE PLAY -->
+      <div style="background:rgba(6,214,160,0.06);border:1px solid rgba(6,214,160,0.25);border-radius:10px;padding:12px 14px;margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="background:var(--green);color:#000;font-size:9px;font-weight:900;padding:3px 10px;border-radius:20px;">🛡️ ${L?'CONSERVADOR':'CONSERVATIVE'}</div>
+          <div style="font-size:10px;color:var(--muted);">${L?'Alta probabilidad · Ganancia moderada · Riesgo mínimo':'High probability · Moderate gain · Minimum risk'}</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
+          <div style="background:rgba(0,0,0,0.2);border-radius:6px;padding:8px;text-align:center;">
+            <div style="font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;margin-bottom:3px;">${L?'Strike':'Strike'}</div>
+            <div style="font-size:16px;font-weight:800;color:var(--green);font-family:'Bebas Neue',sans-serif;">$${(a.price*0.97).toFixed(2)}</div>
+            <div style="font-size:8px;color:var(--muted);">ITM · ${L?'Delta ~0.55':'Delta ~0.55'}</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.2);border-radius:6px;padding:8px;text-align:center;">
+            <div style="font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;margin-bottom:3px;">${L?'Prima Est.':'Est. Premium'}</div>
+            <div style="font-size:16px;font-weight:800;color:var(--gold);font-family:'Bebas Neue',sans-serif;">$${Math.round(a.price*0.06*100)/100}</div>
+            <div style="font-size:8px;color:var(--muted);">${L?'Por acción':'Per share'}</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.2);border-radius:6px;padding:8px;text-align:center;">
+            <div style="font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;margin-bottom:3px;">${L?'1 Contrato':'1 Contract'}</div>
+            <div style="font-size:16px;font-weight:800;color:var(--yellow);font-family:'Bebas Neue',sans-serif;">$${Math.round(a.price*0.06*100)}</div>
+            <div style="font-size:8px;color:var(--muted);">${L?'Costo total':'Total cost'}</div>
+          </div>
+        </div>
+        <div style="margin-top:8px;font-size:10px;color:var(--muted);line-height:1.6;">
+          ${L?`✅ Breakeven: $${(a.price*0.97 + a.price*0.06).toFixed(2)} · Solo necesita subir ${((a.price*0.06/a.price)*100).toFixed(1)}% · Si sube 10% ganas +$${Math.round(a.price*0.10*100 - a.price*0.06*100)}`
+            :`✅ Breakeven: $${(a.price*0.97 + a.price*0.06).toFixed(2)} · Only needs to move ${((a.price*0.06/a.price)*100).toFixed(1)}% · If it moves 10% you make +$${Math.round(a.price*0.10*100 - a.price*0.06*100)}`}
+        </div>
+      </div>
+
+      <!-- AGGRESSIVE PLAY -->
+      <div style="background:rgba(240,165,0,0.06);border:1px solid rgba(240,165,0,0.25);border-radius:10px;padding:12px 14px;margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="background:var(--gold);color:#000;font-size:9px;font-weight:900;padding:3px 10px;border-radius:20px;">⚡ ${L?'AGRESIVO':'AGGRESSIVE'}</div>
+          <div style="font-size:10px;color:var(--muted);">${L?'Señal del scanner · Balance riesgo/retorno · Jugada principal':'Scanner signal · Balanced risk/reward · The main play'}</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
+          <div style="background:rgba(0,0,0,0.2);border-radius:6px;padding:8px;text-align:center;">
+            <div style="font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;margin-bottom:3px;">${L?'Strike':'Strike'}</div>
+            <div style="font-size:16px;font-weight:800;color:var(--gold);font-family:'Bebas Neue',sans-serif;">$${a.target.toFixed(2)}</div>
+            <div style="font-size:8px;color:var(--muted);">ATM · ${L?'Delta ~0.25':'Delta ~0.25'}</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.2);border-radius:6px;padding:8px;text-align:center;">
+            <div style="font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;margin-bottom:3px;">${L?'Prima Est.':'Est. Premium'}</div>
+            <div style="font-size:16px;font-weight:800;color:var(--gold);font-family:'Bebas Neue',sans-serif;">$${(a.cost/100).toFixed(2)}</div>
+            <div style="font-size:8px;color:var(--muted);">${L?'Por acción':'Per share'}</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.2);border-radius:6px;padding:8px;text-align:center;">
+            <div style="font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;margin-bottom:3px;">${L?'1 Contrato':'1 Contract'}</div>
+            <div style="font-size:16px;font-weight:800;color:var(--yellow);font-family:'Bebas Neue',sans-serif;">$${a.cost}</div>
+            <div style="font-size:8px;color:var(--muted);">${L?'Costo total':'Total cost'}</div>
+          </div>
+        </div>
+        <div style="margin-top:8px;font-size:10px;color:var(--muted);line-height:1.6;">
+          ${L?`⚡ Breakeven: $${(a.target + a.cost/100).toFixed(2)} · Potencial +$${a.netProfit} por contrato · ROI objetivo: ${a.roi}%`
+            :`⚡ Breakeven: $${(a.target + a.cost/100).toFixed(2)} · Potential +$${a.netProfit} per contract · Target ROI: ${a.roi}%`}
+        </div>
+      </div>
+
+      <!-- MAXIMUM PAYOUT PLAY -->
+      <div style="background:rgba(77,142,255,0.06);border:1px solid rgba(77,142,255,0.25);border-radius:10px;padding:12px 14px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="background:#4d8eff;color:#fff;font-size:9px;font-weight:900;padding:3px 10px;border-radius:20px;">🚀 ${L?'MÁXIMO PAGO':'MAXIMUM PAYOUT'}</div>
+          <div style="font-size:10px;color:var(--muted);">${L?'Alto riesgo · Alto retorno · Loto con disciplina':'High risk · High return · Lottery with discipline'}</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
+          <div style="background:rgba(0,0,0,0.2);border-radius:6px;padding:8px;text-align:center;">
+            <div style="font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;margin-bottom:3px;">${L?'Strike':'Strike'}</div>
+            <div style="font-size:16px;font-weight:800;color:#4d8eff;font-family:'Bebas Neue',sans-serif;">$${(a.price*1.15).toFixed(2)}</div>
+            <div style="font-size:8px;color:var(--muted);">OTM · ${L?'Delta ~0.15':'Delta ~0.15'}</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.2);border-radius:6px;padding:8px;text-align:center;">
+            <div style="font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;margin-bottom:3px;">${L?'Prima Est.':'Est. Premium'}</div>
+            <div style="font-size:16px;font-weight:800;color:var(--gold);font-family:'Bebas Neue',sans-serif;">$${Math.round(a.price*0.015*100)/100}</div>
+            <div style="font-size:8px;color:var(--muted);">${L?'Por acción':'Per share'}</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.2);border-radius:6px;padding:8px;text-align:center;">
+            <div style="font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;margin-bottom:3px;">${L?'1 Contrato':'1 Contract'}</div>
+            <div style="font-size:16px;font-weight:800;color:var(--yellow);font-family:'Bebas Neue',sans-serif;">$${Math.round(a.price*0.015*100)}</div>
+            <div style="font-size:8px;color:var(--muted);">${L?'Costo total':'Total cost'}</div>
+          </div>
+        </div>
+        <div style="margin-top:8px;font-size:10px;color:var(--muted);line-height:1.6;">
+          ${L?`🚀 Necesita subir 15%+ · Si se mueve 25% ganas +$${Math.round(a.price*0.10*100 - a.price*0.015*100)} · Máx pérdida solo $${Math.round(a.price*0.015*100)} · 1 contrato solamente`
+            :`🚀 Needs 15%+ move · If it moves 25% you make +$${Math.round(a.price*0.10*100 - a.price*0.015*100)} · Max loss only $${Math.round(a.price*0.015*100)} · 1 contract only`}
+        </div>
+      </div>
+
+      <div style="margin-top:10px;padding:8px 10px;background:rgba(0,0,0,0.2);border-radius:8px;font-size:10px;color:var(--muted);text-align:center;">
+        ⚠️ ${L?'Siempre verifica las primas reales en tu broker antes de ejecutar. Las estimaciones de la IA son basadas en datos del mercado — los precios reales varían.':'Always verify real premiums in your broker before executing. AI estimates are based on market data — actual prices vary.'}
+      </div>
+    </div>
+
     <div class="dr-box">
       <div class="dr-box-title">${T.drTitle}</div>
       <div class="dr-row"><span class="dl">${T.drType}</span><span class="dv">${T.drLong}</span></div>
@@ -1664,6 +1800,32 @@ function setLang(lang) {
   if(ft) ft.innerHTML = lang==='es'
     ? '⚠️ Solo herramienta educativa — no es asesoramiento financiero. El trading de opciones implica riesgo significativo. Siempre practica primero en papel. Toca 📈 Precio en Vivo en cualquier tarjeta para verificar antes de operar.<br><br><a href="journal.html" style="color:var(--gold);font-weight:700;text-decoration:none;">📋 Diario del Desafío de Trading de 30 Días →</a><br><br><span style="font-size:10px;color:var(--muted);">Copyright © 2026 Edwin M. Jordan · <a href="terms.html" style="color:var(--muted);">Términos de Servicio</a> · <a href="privacy.html" style="color:var(--muted);">Política de Privacidad</a></span>'
     : '⚠️ Educational tool only — not financial advice. Options trading involves significant risk. Always paper trade first. Tap 📈 Live Price on any card to verify before trading.<br><br><a href="journal.html" style="color:var(--gold);font-weight:700;text-decoration:none;">📋 30 Day Trading Challenge Journal →</a><br><br><span style="font-size:10px;color:var(--muted);">Copyright © 2026 Edwin M. Jordan · <a href="terms.html" style="color:var(--muted);">Terms of Service</a> · <a href="privacy.html" style="color:var(--muted);">Privacy Policy</a></span>';
+  const egCodeLabel = document.getElementById('eg-code-label');
+  const betaInput = document.getElementById('beta-input');
+  if(egCodeLabel) egCodeLabel.textContent = lang==='es' ? '🔐 Código de Acceso Beta' : '🔐 Beta Access Code';
+  if(betaInput) betaInput.placeholder = lang==='es' ? 'Ingresa tu código beta' : 'Enter your beta code';
+  // Update email gate text
+  const egTitle = document.getElementById('eg-title');
+  const egSub = document.getElementById('eg-sub');
+  const egBadge = document.getElementById('eg-badge');
+  const egFeatTitle = document.getElementById('eg-features-title');
+  const emailBtn = document.getElementById('email-submit-btn');
+  const egGuarantee = document.getElementById('eg-guarantee');
+  const emailInput = document.getElementById('email-input');
+  if(egTitle) egTitle.innerHTML = lang==='es' ? 'Bienvenido a<br>Smart Money Scanner' : 'Welcome to<br>Smart Money Scanner';
+  if(egSub) egSub.textContent = lang==='es' ? 'Ingresa tu email para comenzar tu prueba gratuita de 30 días. Sin tarjeta de crédito.' : 'Enter your email to start your free 30-day trial. No credit card required.';
+  if(egBadge) egBadge.textContent = lang==='es' ? '✅ 30 Días Gratis · Sin Tarjeta · Cancela Cuando Quieras' : '✅ 30 Days Free · No Credit Card · Cancel Anytime';
+  if(egFeatTitle) egFeatTitle.textContent = lang==='es' ? 'Lo Que Obtienes Gratis Por 30 Días' : 'What You Get Free For 30 Days';
+  if(emailBtn) emailBtn.textContent = lang==='es' ? '🚀 COMENZAR PRUEBA GRATUITA' : '🚀 START FREE TRIAL';
+  if(egGuarantee) egGuarantee.textContent = lang==='es' ? '🔒 Tu email solo se usa para gestionar tu prueba. Nunca enviamos spam. Cancela cuando quieras.' : '🔒 Your email is only used to manage your trial. We never spam. Unsubscribe anytime.';
+  if(emailInput) emailInput.placeholder = lang==='es' ? 'tu@email.com' : 'your@email.com';
+  const f1=document.getElementById('eg-f1'),f2=document.getElementById('eg-f2'),f3=document.getElementById('eg-f3'),f4=document.getElementById('eg-f4'),f5=document.getElementById('eg-f5');
+  if(f1) f1.textContent = lang==='es' ? 'Detección real de flujo ballena — señales institucionales' : 'Real whale flow detection — institutional signals';
+  if(f2) f2.textContent = lang==='es' ? 'Escaneo IA diario — 20 acciones clasificadas de mejor a peor' : 'Daily AI scan — 20 stocks ranked best to worst';
+  if(f3) f3.textContent = lang==='es' ? 'Filtro ballena 6 pasos con datos reales de opciones' : '6-Step whale filter with real options data';
+  if(f4) f4.textContent = lang==='es' ? 'Estrategia Wheel — herramienta de generación de ingresos' : 'The Wheel Strategy — income generation tool';
+  if(f5) f5.textContent = lang==='es' ? 'Completamente bilingüe — inglés y español' : 'Full bilingual — English and Spanish';
+
   // Update brief stats labels
   const lblSB = document.getElementById('lbl-strong-buy');
   const lblW  = document.getElementById('lbl-watch');
@@ -1716,6 +1878,44 @@ if('serviceWorker' in navigator) {
   });
 }
 </script>
+<!-- EMAIL GATE OVERLAY -->
+<div class="paywall-overlay" id="email-gate-overlay">
+  <div class="paywall-box">
+    <div class="pw-header">
+      <div class="pw-logo">SM$</div>
+      <div class="pw-title" id="eg-title">Welcome to<br>Smart Money Scanner</div>
+      <div class="pw-sub" id="eg-sub">Enter your email to start your free 30-day trial. No credit card required.</div>
+      <div class="pw-trial-badge" id="eg-badge">✅ 30 Days Free · No Credit Card · Cancel Anytime</div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px;">
+      <div style="font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px;" id="eg-features-title">What You Get Free For 30 Days</div>
+      <div class="pw-feature"><span class="pw-feature-icon">🐋</span><span id="eg-f1">Real whale flow detection — institutional signals</span></div>
+      <div class="pw-feature"><span class="pw-feature-icon">⚡</span><span id="eg-f2">Daily AI scan — 20 stocks ranked best to worst</span></div>
+      <div class="pw-feature"><span class="pw-feature-icon">📊</span><span id="eg-f3">6-Step whale filter with real options data</span></div>
+      <div class="pw-feature"><span class="pw-feature-icon">🔄</span><span id="eg-f4">The Wheel Strategy — income generation tool</span></div>
+      <div class="pw-feature"><span class="pw-feature-icon">🌎</span><span id="eg-f5">Full bilingual — English and Spanish</span></div>
+    </div>
+
+    <div style="margin-bottom:12px;">
+      <input type="email" id="email-input" placeholder="your@email.com" style="width:100%;background:var(--surface);border:1px solid var(--border);color:var(--text);font-size:15px;padding:14px 16px;border-radius:10px;font-family:'DM Sans',system-ui;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')document.getElementById('beta-input').focus()">
+    </div>
+    <div style="margin-bottom:16px;">
+      <div style="font-size:11px;font-weight:700;color:var(--muted);margin-bottom:6px;" id="eg-code-label">🔐 Beta Access Code</div>
+      <input type="text" id="beta-input" placeholder="Enter your beta code" style="width:100%;background:var(--surface);border:1px solid var(--border);color:var(--text);font-size:15px;padding:14px 16px;border-radius:10px;font-family:'DM Sans',system-ui;outline:none;box-sizing:border-box;text-transform:uppercase;letter-spacing:2px;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')submitEmail()">
+      <div id="email-error" style="display:none;color:var(--red);font-size:11px;margin-top:6px;"></div>
+    </div>
+
+    <button class="pw-cta" id="email-submit-btn" onclick="submitEmail()">
+      🚀 START FREE TRIAL
+    </button>
+
+    <div class="pw-guarantee" id="eg-guarantee">
+      🔒 Your email is only used to manage your trial. We never spam. Unsubscribe anytime.
+    </div>
+  </div>
+</div>
+
 <!-- PAYWALL OVERLAY -->
 <div class="paywall-overlay" id="paywall-overlay">
   <div class="paywall-box">
@@ -1787,62 +1987,231 @@ if('serviceWorker' in navigator) {
 </div>
 
 <script>
-// ── PAYWALL SYSTEM ──────────────────────────────────────────────────────────
+// ── EMAIL TRIAL SYSTEM — Supabase Backend ───────────────────────────────────
 const TRIAL_DAYS = 30;
+
+// ── BETA ACCESS CODES ────────────────────────────────────────────────────────
+// Add/remove codes here. Share privately with your beta testers.
+// Set BETA_MODE = false when you go public to remove the code requirement.
+const BETA_MODE = true;
+const BETA_CODES = [
+  'LEVELTHEFIELD',   // Main beta code — share this one
+  'SMSBeta2026',     // Spanish beta tester code
+  'WHALESCANNER',    // Extra code for key testers
+];
+
+const SUPABASE_URL = 'PASTE_YOUR_SUPABASE_URL_HERE';
+const SUPABASE_ANON_KEY = 'PASTE_YOUR_SUPABASE_ANON_KEY_HERE';
+
 const PLANS = {
-  monthly:   { name: 'Monthly',   price: '$9.99/month',   amount: 999,  stripe_price: 'price_monthly_placeholder' },
+  monthly:   { name: 'Monthly',   price: '$9.99/month',     amount: 999,  stripe_price: 'price_monthly_placeholder' },
   quarterly: { name: 'Quarterly', price: '$24.99/3 months', amount: 2499, stripe_price: 'price_quarterly_placeholder' },
-  annual:    { name: 'Annual',    price: '$79.99/year',   amount: 7999, stripe_price: 'price_annual_placeholder' }
+  annual:    { name: 'Annual',    price: '$79.99/year',     amount: 7999, stripe_price: 'price_annual_placeholder' }
 };
 
 let selectedPlan = 'quarterly';
+let currentUser = null; // { email, trial_start, days_used, days_left, is_paid }
 
-function initTrial() {
-  // Get or set trial start date
-  let startDate = localStorage.getItem('sms_trial_start');
-  if (!startDate) {
-    startDate = new Date().toISOString().split('T')[0];
-    localStorage.setItem('sms_trial_start', startDate);
-  }
+// ── SUPABASE HELPERS ─────────────────────────────────────────────────────────
+async function sbQuery(endpoint, options = {}) {
+  try {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/${endpoint}`, {
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': options.prefer || 'return=representation'
+      },
+      ...options
+    });
+    if (!r.ok) return null;
+    return await r.json();
+  } catch(e) { return null; }
+}
 
-  // Check if user has active subscription token
-  const token = localStorage.getItem('sms_subscription_token');
-  if (token && validateToken(token)) return; // Paid user — skip paywall
+async function getOrCreateUser(email) {
+  // Check if user exists
+  const existing = await sbQuery(`sms_users?email=eq.${encodeURIComponent(email)}&select=*`);
+  if (existing && existing.length > 0) return existing[0];
 
-  // Calculate days remaining
-  const start = new Date(startDate);
+  // Create new user
+  const today = new Date().toISOString().split('T')[0];
+  const created = await sbQuery('sms_users', {
+    method: 'POST',
+    body: JSON.stringify({ email, trial_start: today, is_paid: false }),
+    prefer: 'return=representation'
+  });
+  return created ? created[0] : null;
+}
+
+async function checkUserStatus(email) {
+  const user = await sbQuery(`sms_users?email=eq.${encodeURIComponent(email)}&select=*`);
+  if (!user || user.length === 0) return null;
+  const u = user[0];
+  const start = new Date(u.trial_start);
   const today = new Date();
   const daysUsed = Math.floor((today - start) / (1000*60*60*24));
   const daysLeft = Math.max(0, TRIAL_DAYS - daysUsed);
-  const pct = Math.round((daysUsed / TRIAL_DAYS) * 100);
+  return { ...u, daysUsed, daysLeft, pct: Math.min(100, Math.round(daysUsed/TRIAL_DAYS*100)) };
+}
 
-  // Update trial banner
+// ── EMAIL GATE ───────────────────────────────────────────────────────────────
+function showEmailGate() {
+  const L = currentLang === 'es';
+  const overlay = document.getElementById('email-gate-overlay');
+  if (overlay) { overlay.classList.add('show'); document.body.style.overflow = 'hidden'; }
+}
+
+function hideEmailGate() {
+  const overlay = document.getElementById('email-gate-overlay');
+  if (overlay) { overlay.classList.remove('show'); document.body.style.overflow = ''; }
+}
+
+async function submitEmail() {
+  const L = currentLang === 'es';
+  const input = document.getElementById('email-input');
+  const btn = document.getElementById('email-submit-btn');
+  const err = document.getElementById('email-error');
+  const email = input.value.trim().toLowerCase();
+
+  if (!email || !email.includes('@') || !email.includes('.')) {
+    err.textContent = L ? 'Por favor ingresa un email válido.' : 'Please enter a valid email.';
+    err.style.display = 'block';
+    return;
+  }
+
+  // Beta code check
+  if (BETA_MODE) {
+    const codeInput = document.getElementById('beta-input');
+    const code = (codeInput?.value || '').trim().toUpperCase();
+    const validCodes = BETA_CODES.map(c => c.toUpperCase());
+    if (!validCodes.includes(code)) {
+      err.textContent = L
+        ? '❌ Código beta inválido. Solicita tu código a Edwin en smartmoneyscanner.money'
+        : '❌ Invalid beta code. Request your code from Edwin at smartmoneyscanner.money';
+      err.style.display = 'block';
+      return;
+    }
+    // Save valid code so returning users skip this check
+    localStorage.setItem('sms_beta_code', code);
+  }
+
+  btn.disabled = true;
+  btn.textContent = L ? 'Verificando...' : 'Checking...';
+  err.style.display = 'none';
+
+  // Save email locally for fast re-access
+  localStorage.setItem('sms_user_email', email);
+
+  // Check if Supabase is configured
+  if (SUPABASE_URL.includes('PASTE_YOUR')) {
+    // Supabase not set up yet — fall back to localStorage trial
+    let startDate = localStorage.getItem('sms_trial_start');
+    if (!startDate) {
+      startDate = new Date().toISOString().split('T')[0];
+      localStorage.setItem('sms_trial_start', startDate);
+    }
+    const daysUsed = Math.floor((new Date() - new Date(startDate)) / 864e5);
+    currentUser = { email, trial_start: startDate, daysUsed, daysLeft: Math.max(0, TRIAL_DAYS - daysUsed), is_paid: false };
+    hideEmailGate();
+    applyUserStatus(currentUser);
+    btn.disabled = false;
+    btn.textContent = L ? '🚀 COMENZAR PRUEBA GRATUITA' : '🚀 START FREE TRIAL';
+    return;
+  }
+
+  // Get or create user in Supabase
+  const user = await getOrCreateUser(email);
+  if (!user) {
+    err.textContent = L ? 'Error al conectar. Intenta de nuevo.' : 'Connection error. Please try again.';
+    err.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = L ? '🚀 COMENZAR PRUEBA GRATUITA' : '🚀 START FREE TRIAL';
+    return;
+  }
+
+  const status = await checkUserStatus(email);
+  currentUser = status;
+  hideEmailGate();
+  applyUserStatus(status);
+  btn.disabled = false;
+  btn.textContent = L ? '🚀 COMENZAR PRUEBA GRATUITA' : '🚀 START FREE TRIAL';
+}
+
+function applyUserStatus(user) {
+  if (!user) return;
+  const L = currentLang === 'es';
+
+  // Paid user — full access
+  if (user.is_paid) {
+    document.getElementById('trial-banner').style.display = 'none';
+    return;
+  }
+
+  // Trial expired — show paywall
+  if (user.daysLeft <= 0) {
+    showPaywall();
+    return;
+  }
+
+  // Update progress bar in paywall
+  document.getElementById('pw-bar-fill').style.width = user.pct + '%';
+  document.getElementById('pw-bar-day').textContent = L ? `Día ${user.daysUsed}` : `Day ${user.daysUsed}`;
+
+  // Show trial banner
   const banner = document.getElementById('trial-banner');
   const bannerDays = document.getElementById('trial-days-display');
   const bannerText = document.getElementById('trial-banner-text');
 
-  if (daysLeft <= 0) {
-    // Trial expired — show paywall
-    showPaywall();
-  } else if (daysLeft <= 7) {
-    // Last 7 days — show urgent banner
+  if (user.daysLeft <= 7) {
     banner.style.display = 'flex';
     banner.style.borderColor = 'rgba(239,71,111,0.4)';
     bannerDays.style.color = 'var(--red)';
-    bannerDays.textContent = daysLeft;
-    bannerText.textContent = currentLang==='es' ? `días restantes en tu prueba gratuita · Actualiza ahora para mantener el acceso` : `days left in your free trial · Upgrade now to keep access`;
-  } else if (daysLeft <= 14) {
-    // Last 14 days — show banner
+    bannerDays.textContent = user.daysLeft;
+    bannerText.textContent = L ? `días restantes · ¡Actualiza ahora!` : `days left · Upgrade now to keep access!`;
+  } else if (user.daysLeft <= 14) {
     banner.style.display = 'flex';
-    bannerDays.textContent = daysLeft;
-    bannerText.textContent = currentLang==='es' ? `días restantes en tu prueba gratuita · Actualiza para mantener acceso completo` : `days left in your free trial · Upgrade to keep full access`;
+    bannerDays.textContent = user.daysLeft;
+    bannerText.textContent = L ? `días restantes en tu prueba gratuita` : `days left in your free trial`;
   }
-
-  // Update paywall progress bar
-  document.getElementById('pw-bar-fill').style.width = Math.min(pct, 100) + '%';
-  document.getElementById('pw-bar-day').textContent = `Day ${daysUsed}`;
 }
 
+// ── INIT ─────────────────────────────────────────────────────────────────────
+async function initTrial() {
+  // ── EMAIL GATE PAUSED — Enable Wednesday when Supabase is ready ──────────
+  // To re-enable: remove the return statement below and set up Supabase keys
+  return; // PAUSED — app runs freely until Wednesday
+  // ─────────────────────────────────────────────────────────────────────────
+
+  // Check if we already have their email
+  const savedEmail = localStorage.getItem('sms_user_email');
+  const savedCode = localStorage.getItem('sms_beta_code');
+
+  // New user with no saved code — show email gate (will require beta code)
+  if (!savedEmail || (BETA_MODE && !savedCode)) {
+    showEmailGate();
+    return;
+  }
+
+  if (savedEmail) {
+    // Returning user — verify status
+    if (SUPABASE_URL.includes('PASTE_YOUR')) {
+      // localStorage fallback
+      let startDate = localStorage.getItem('sms_trial_start');
+      if (!startDate) { startDate = new Date().toISOString().split('T')[0]; localStorage.setItem('sms_trial_start', startDate); }
+      const daysUsed = Math.floor((new Date() - new Date(startDate)) / 864e5);
+      currentUser = { email: savedEmail, daysUsed, daysLeft: Math.max(0, TRIAL_DAYS - daysUsed), is_paid: false };
+      applyUserStatus(currentUser);
+    } else {
+      const status = await checkUserStatus(savedEmail);
+      if (status) { currentUser = status; applyUserStatus(status); }
+      else showEmailGate(); // Email not in DB — ask again
+    }
+  } else {
+    // New user — show email gate
+    showEmailGate();
+  }
+}
 function validateToken(token) {
   // Basic token validation — checks expiry date encoded in token
   try {
