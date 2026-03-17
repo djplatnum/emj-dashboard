@@ -326,8 +326,8 @@ body{background:var(--bg);color:var(--text);font-family:"DM Sans",system-ui;}
   <!-- Trial Banner -->
   <div class="trial-banner" id="trial-banner" onclick="showPaywall()" style="display:none;">
     <div class="trial-banner-days" id="trial-days-display">30</div>
-    <div class="trial-banner-text" id="trial-banner-text">days left in your free trial · Upgrade to keep full access</div>
-    <button class="trial-banner-cta">UPGRADE →</button>
+    <div class="trial-banner-text" id="trial-banner-text">${currentLang==="es"?"días restantes en tu prueba · Actualiza para mantener acceso completo":"days left in your free trial · Upgrade to keep full access"}</div>
+    <button class="trial-banner-cta" id="trial-upgrade-btn">${currentLang==="es"?"ACTUALIZAR →":"UPGRADE →"}</button>
   </div>
 
   <div class="broker-section">
@@ -357,19 +357,19 @@ body{background:var(--bg);color:var(--text);font-family:"DM Sans",system-ui;}
   </div>
 
   <div id="bp-section">
-    <div class="bp-hdr">⚡ TODAY'S BEST PLAYS — AI Selected Top 3</div>
+    <div class="bp-hdr" id="bp-hdr">⚡ TODAY'S BEST PLAYS — AI Selected Top 3</div>
     <div class="bp-grid" id="bp-grid"></div>
   </div>
 
   <div id="brief-section">
     <div class="brief-box">
-      <div class="brief-title">📋 SMART MONEY SCANNER — MORNING BRIEF</div>
+      <div class="brief-title" id="brief-title">📋 SMART MONEY SCANNER — MORNING BRIEF</div>
       <div class="brief-body" id="brief-body"></div>
       <div class="brief-stats">
-        <div class="bstat g"><div class="bl">Strong Buy</div><div class="bv" id="cnt-g">0</div></div>
-        <div class="bstat y"><div class="bl">Watch</div><div class="bv" id="cnt-y">0</div></div>
-        <div class="bstat r"><div class="bl">Stay Away</div><div class="bv" id="cnt-r">0</div></div>
-        <div class="bstat b"><div class="bl">Best Play</div><div class="bv" id="cnt-b">—</div></div>
+        <div class="bstat g"><div class="bl" id="lbl-strong-buy">Strong Buy</div><div class="bv" id="cnt-g">0</div></div>
+        <div class="bstat y"><div class="bl" id="lbl-watch">Watch</div><div class="bv" id="cnt-y">0</div></div>
+        <div class="bstat r"><div class="bl" id="lbl-stay-away">Stay Away</div><div class="bv" id="cnt-r">0</div></div>
+        <div class="bstat b"><div class="bl" id="lbl-best-play">Best Play</div><div class="bv" id="cnt-b">—</div></div>
       </div>
     </div>
   </div>
@@ -382,14 +382,14 @@ body{background:var(--bg);color:var(--text);font-family:"DM Sans",system-ui;}
   </div>
 
   <div id="results">
-    <div style="text-align:center;padding:60px 20px;color:var(--muted);">
+    <div id="empty-state" style="text-align:center;padding:60px 20px;color:var(--muted);">
       <div style="font-size:44px;margin-bottom:14px;">📊</div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--text);margin-bottom:8px;">TAP AUTO MORNING SCAN</div>
-      <div style="font-size:13px;line-height:1.7;max-width:420px;margin:0 auto;">The AI scans all 20 stocks, finds institutional patterns, and shows the top 3 best plays — just like hedge fund CEOs have, built for you.</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--text);margin-bottom:8px;" id="empty-title">TAP AUTO MORNING SCAN</div>
+      <div style="font-size:13px;line-height:1.7;max-width:420px;margin:0 auto;" id="empty-body">The AI scans all 20 stocks, finds institutional patterns, and shows the top 3 best plays — built for you.</div>
     </div>
   </div>
 
-  <div class="footer">⚠️ Educational tool only — not financial advice. Options trading involves significant risk. Always paper trade first. Tap 📈 Live Price on any card to verify before trading.
+  <div class="footer" id="footer-text">⚠️ Educational tool only — not financial advice. Options trading involves significant risk. Always paper trade first. Tap 📈 Live Price on any card to verify before trading.
   <br><br><a href="journal.html" style="color:var(--gold);font-weight:700;text-decoration:none;">📋 30 Day Trading Challenge Journal →</a>
   <br><br><span style="font-size:10px;color:var(--muted);">Copyright © 2026 Edwin M. Jordan · <a href="terms.html" style="color:var(--muted);">Terms of Service</a> · <a href="privacy.html" style="color:var(--muted);">Privacy Policy</a></span></div>
 </div>
@@ -1093,7 +1093,7 @@ function renderCard(stock,a,idx){
     ${whalePanel}
     <div class="voi-box">
       <div class="voi-title">${T.voiTitle}</div>
-      <div class="voi-formula">VOL ÷ OI = ${a.voi} → ${L&&a.voiKey==='bull'?'DINERO NUEVO ALCISTA':L&&a.voiKey==='bear'?'DINERO NUEVO BAJISTA':a.voiSignal}</div>
+      <div class="voi-formula">${L?"VOL ÷ OI":"VOL ÷ OI"} = ${a.voi} → ${L?(a.voiKey==='bull'?'DINERO NUEVO ALCISTA':a.voiKey==='bear'?'DINERO NUEVO BAJISTA':'NEUTRAL'):(a.voiKey==='bull'?'BULLISH NEW MONEY':a.voiKey==='bear'?'BEARISH NEW MONEY':'NEUTRAL')}</div>
       <div class="voi-desc">${voiDesc}</div>
     </div>
   </div>
@@ -1499,10 +1499,10 @@ function runCalc(id){
   // Summary cards
   const summaryEl=document.getElementById('cr-summary-'+id);
   summaryEl.innerHTML=`
-    <div class="rh-stat"><div class="rh-stat-label">Total Cost</div><div class="rh-stat-value" style="color:var(--red)">$${totalCost.toLocaleString()}</div></div>
-    <div class="rh-stat"><div class="rh-stat-label">Breakeven</div><div class="rh-stat-value" style="color:var(--yellow)">$${breakeven.toFixed(2)}</div></div>
-    <div class="rh-stat"><div class="rh-stat-label">Max Loss</div><div class="rh-stat-value" style="color:var(--red)">$${totalCost.toLocaleString()}</div></div>
-    <div class="rh-stat"><div class="rh-stat-label">Days Left</div><div class="rh-stat-value" style="color:${dte<=7?'var(--red)':dte<=21?'var(--yellow)':'var(--green)'}">${dte}d</div></div>
+    <div class="rh-stat"><div class="rh-stat-label">${L?'Costo Total':'Total Cost'}</div><div class="rh-stat-value" style="color:var(--red)">$${totalCost.toLocaleString()}</div></div>
+    <div class="rh-stat"><div class="rh-stat-label">${L?'Punto de Equilibrio':'Breakeven'}</div><div class="rh-stat-value" style="color:var(--yellow)">$${breakeven.toFixed(2)}</div></div>
+    <div class="rh-stat"><div class="rh-stat-label">${L?'Pérdida Máxima':'Max Loss'}</div><div class="rh-stat-value" style="color:var(--red)">$${totalCost.toLocaleString()}</div></div>
+    <div class="rh-stat"><div class="rh-stat-label">${L?'Días Restantes':'Days Left'}</div><div class="rh-stat-value" style="color:${dte<=7?'var(--red)':dte<=21?'var(--yellow)':'var(--green)'}">${dte}d</div></div>
   `;
 
   // Time decay warning
@@ -1596,14 +1596,16 @@ function setLang(lang) {
   document.getElementById('btn-scan').textContent = t.rescanBtn;
   document.getElementById('btn-analyze').textContent = t.analyzeBtn;
   document.getElementById('searchInput').placeholder = t.searchPlaceholder;
+  document.getElementById('stext').textContent = t.readyText;
+  const trialBtn = document.getElementById('trial-upgrade-btn');
+  if(trialBtn) trialBtn.textContent = lang==='es' ? 'ACTUALIZAR →' : 'UPGRADE →';
+  updatePaywallLang();
   document.getElementById('broker-title').textContent = t.brokerTitle;
   const pwaText = document.getElementById('pwa-text');
   if(pwaText) pwaText.textContent = t.pwaText;
   const pwaBtn = document.getElementById('pwa-install-btn');
   if(pwaBtn) pwaBtn.textContent = t.pwaBtn;
   document.querySelector('.footer').textContent = t.footer;
-  const bpHdr = document.getElementById('bp-section')?.querySelector('.bp-hdr');
-  if(bpHdr) bpHdr.textContent = t.bestPlaysHdr;
   document.documentElement.lang = lang;
 
   // Swap broker grid based on language — Latin America users need different brokers
@@ -1644,7 +1646,43 @@ function setLang(lang) {
       </a>`;
   }
 
-  // Re-run scan to rebuild all cards in new language
+  // Swap stat labels
+  document.getElementById('lbl-strong-buy').textContent = lang==='es' ? 'Compra Fuerte' : 'Strong Buy';
+  document.getElementById('lbl-watch').textContent       = lang==='es' ? 'Observar'      : 'Watch';
+  document.getElementById('lbl-stay-away').textContent   = lang==='es' ? 'Evitar'        : 'Stay Away';
+  document.getElementById('lbl-best-play').textContent   = lang==='es' ? 'Mejor Jugada'  : 'Best Play';
+  // Swap brief title
+  const bt = document.getElementById('brief-title');
+  if(bt) bt.textContent = lang==='es' ? '📋 SMART MONEY SCANNER — RESUMEN MATUTINO' : '📋 SMART MONEY SCANNER — MORNING BRIEF';
+  // Swap empty state
+  const et = document.getElementById('empty-title');
+  const eb = document.getElementById('empty-body');
+  if(et) et.textContent = lang==='es' ? 'TOCA ESCANEO AUTOMÁTICO' : 'TAP AUTO MORNING SCAN';
+  if(eb) eb.textContent = lang==='es' ? 'La IA escanea las 20 acciones, encuentra patrones institucionales y muestra las 3 mejores jugadas — construido para ti.' : 'The AI scans all 20 stocks, finds institutional patterns, and shows the top 3 best plays — built for you.';
+  // Swap footer
+  const ft = document.getElementById('footer-text');
+  if(ft) ft.innerHTML = lang==='es'
+    ? '⚠️ Solo herramienta educativa — no es asesoramiento financiero. El trading de opciones implica riesgo significativo. Siempre practica primero en papel. Toca 📈 Precio en Vivo en cualquier tarjeta para verificar antes de operar.<br><br><a href="journal.html" style="color:var(--gold);font-weight:700;text-decoration:none;">📋 Diario del Desafío de Trading de 30 Días →</a><br><br><span style="font-size:10px;color:var(--muted);">Copyright © 2026 Edwin M. Jordan · <a href="terms.html" style="color:var(--muted);">Términos de Servicio</a> · <a href="privacy.html" style="color:var(--muted);">Política de Privacidad</a></span>'
+    : '⚠️ Educational tool only — not financial advice. Options trading involves significant risk. Always paper trade first. Tap 📈 Live Price on any card to verify before trading.<br><br><a href="journal.html" style="color:var(--gold);font-weight:700;text-decoration:none;">📋 30 Day Trading Challenge Journal →</a><br><br><span style="font-size:10px;color:var(--muted);">Copyright © 2026 Edwin M. Jordan · <a href="terms.html" style="color:var(--muted);">Terms of Service</a> · <a href="privacy.html" style="color:var(--muted);">Privacy Policy</a></span>';
+  // Update brief stats labels
+  const lblSB = document.getElementById('lbl-strong-buy');
+  const lblW  = document.getElementById('lbl-watch');
+  const lblSA = document.getElementById('lbl-stay-away');
+  const lblBP = document.getElementById('lbl-best-play');
+  const lblBT = document.getElementById('brief-title');
+  const progLbl = document.getElementById('prog-label');
+  const pwaBtn2 = document.getElementById('pwa-install-btn');
+  const upgradeBtn = document.getElementById('trial-upgrade-btn');
+  if(lblSB) lblSB.textContent = lang==='es' ? 'Compra Fuerte' : 'Strong Buy';
+  if(lblW)  lblW.textContent  = lang==='es' ? 'Observar' : 'Watch';
+  if(lblSA) lblSA.textContent = lang==='es' ? 'Evitar' : 'Stay Away';
+  if(lblBP) lblBP.textContent = lang==='es' ? 'Mejor Jugada' : 'Best Play';
+  if(lblBT) lblBT.textContent = lang==='es' ? '📋 SMART MONEY SCANNER — RESUMEN DE LA MAÑANA' : '📋 SMART MONEY SCANNER — MORNING BRIEF';
+  if(bpHdr) bpHdr.textContent = lang==='es' ? '⚡ LAS MEJORES JUGADAS DE HOY — Top 3 Seleccionadas por IA' : '⚡ TODAY\'S BEST PLAYS — AI Selected Top 3';
+  if(pwaBtn2) pwaBtn2.textContent = lang==='es' ? 'Instalar App' : 'Install App';
+  if(upgradeBtn) upgradeBtn.textContent = lang==='es' ? 'ACTUALIZAR →' : 'UPGRADE →';
+  const allTitle = document.getElementById('all-title');
+  if(allTitle && allTitle.style.display!=='none') allTitle.textContent = lang==='es' ? `TODAS LAS 20 ACCIONES — CLASIFICADAS DE MEJOR A PEOR` : `ALL 20 STOCKS — RANKED BEST TO WORST`;
   runScan();
 }
 
@@ -1683,53 +1721,53 @@ if('serviceWorker' in navigator) {
   <div class="paywall-box">
     <div class="pw-header">
       <div class="pw-logo">SM$</div>
-      <div class="pw-title">Your Free Trial<br>Has Ended</div>
+      <div class="pw-title">${L?'Tu Prueba Gratuita':'Your Free Trial'}<br>${L?'Ha Terminado':'Has Ended'}</div>
       <div class="pw-sub">You have been using Smart Money Scanner to level the field. Keep your edge with a subscription.</div>
       <div class="pw-trial-badge">✅ 30 Days Free · No Credit Card Required</div>
     </div>
 
     <div class="pw-progress">
-      <div class="pw-progress-title">Your Free Trial Period</div>
+      <div class="pw-progress-title">${L?'Tu Período de Prueba Gratuita':'Your Free Trial Period'}</div>
       <div class="pw-bar-bg"><div class="pw-bar-fill" id="pw-bar-fill" style="width:100%"></div></div>
       <div class="pw-bar-label"><span>Day 1</span><span id="pw-bar-day">Day 30</span><span>Day 30</span></div>
     </div>
 
     <div class="pw-features">
-      <div class="pw-features-title">Everything Included In Your Subscription</div>
-      <div class="pw-feature"><span class="pw-feature-icon">🐋</span>Real whale flow detection — Massive.com institutional data</div>
-      <div class="pw-feature"><span class="pw-feature-icon">⚡</span>Daily AI scan — 20 stocks ranked best to worst</div>
-      <div class="pw-feature"><span class="pw-feature-icon">📊</span>6-Step whale filter — real options chain analysis</div>
-      <div class="pw-feature"><span class="pw-feature-icon">🎓</span>Professor Tutor — 10 lessons from beginner to advanced</div>
-      <div class="pw-feature"><span class="pw-feature-icon">🔄</span>The Wheel Strategy — cash secured puts and covered calls</div>
-      <div class="pw-feature"><span class="pw-feature-icon">🦋</span>The Flyagonal — Steve Ganz 96% win rate strategy</div>
-      <div class="pw-feature"><span class="pw-feature-icon">💰</span>Wealth Builder — compounding projector and income tracker</div>
-      <div class="pw-feature"><span class="pw-feature-icon">🌎</span>Full bilingual — English and Spanish</div>
+      <div class="pw-features-title">${L?'Todo Incluido En Tu Suscripción':'Everything Included In Your Subscription'}</div>
+      <div class="pw-feature"><span class="pw-feature-icon">🐋</span>${currentLang==="es"?"Detección real de flujo ballena — datos institucionales":"Real whale flow detection — Massive.com institutional data"}</div>
+      <div class="pw-feature"><span class="pw-feature-icon">⚡</span>${currentLang==="es"?"Escaneo IA diario — 20 acciones clasificadas de mejor a peor":"Daily AI scan — 20 stocks ranked best to worst"}</div>
+      <div class="pw-feature"><span class="pw-feature-icon">📊</span>${currentLang==="es"?"Filtro ballena 6 pasos — análisis real de cadena de opciones":"6-Step whale filter — real options chain analysis"}</div>
+      <div class="pw-feature"><span class="pw-feature-icon">🎓</span>${currentLang==="es"?"Tutor Profesor — 10 lecciones de principiante a avanzado":"Professor Tutor — 10 lessons from beginner to advanced"}</div>
+      <div class="pw-feature"><span class="pw-feature-icon">🔄</span>${currentLang==="es"?"La Estrategia Wheel — puts con garantía y calls cubiertos":"The Wheel Strategy — cash secured puts and covered calls"}</div>
+      <div class="pw-feature"><span class="pw-feature-icon">🦋</span>${currentLang==="es"?"El Flyagonal — estrategia de Steve Ganz con 96% de éxito":"The Flyagonal — Steve Ganz 96% win rate strategy"}</div>
+      <div class="pw-feature"><span class="pw-feature-icon">💰</span>${currentLang==="es"?"Constructor de Riqueza — proyector de capitalización e ingresos":"Wealth Builder — compounding projector and income tracker"}</div>
+      <div class="pw-feature"><span class="pw-feature-icon">🌎</span>${currentLang==="es"?"Completamente bilingüe — inglés y español":"Full bilingual — English and Spanish"}</div>
     </div>
 
     <div class="pw-plans" id="pw-plans">
       <div class="pw-plan" id="plan-monthly" onclick="selectPlan('monthly')">
-        <div class="pw-plan-name">Monthly</div>
+        <div class="pw-plan-name">${L?'Mensual':'Monthly'}</div>
         <div class="pw-plan-price">$9<span style="font-size:16px">.99</span></div>
-        <div class="pw-plan-period">per month</div>
-        <div class="pw-plan-save" style="color:var(--muted);">Flexible</div>
+        <div class="pw-plan-period">${currentLang==="es"?"por mes":"per month"}</div>
+        <div class="pw-plan-save" style="color:var(--muted);">${L?'Flexible':'Flexible'}</div>
       </div>
       <div class="pw-plan popular selected" id="plan-quarterly" onclick="selectPlan('quarterly')">
-        <div class="pw-popular-badge">⭐ BEST VALUE</div>
-        <div class="pw-plan-name">Quarterly</div>
+        <div class="pw-popular-badge" id="pw-best-value">⭐ BEST VALUE</div>
+        <div class="pw-plan-name">${L?'Trimestral':'Quarterly'}</div>
         <div class="pw-plan-price">$24<span style="font-size:16px">.99</span></div>
-        <div class="pw-plan-period">every 3 months</div>
-        <div class="pw-plan-save">Save 17%</div>
+        <div class="pw-plan-period">${currentLang==="es"?"cada 3 meses":"every 3 months"}</div>
+        <div class="pw-plan-save">${currentLang==="es"?"Ahorra 17%":"Save 17%"}</div>
       </div>
       <div class="pw-plan" id="plan-annual" onclick="selectPlan('annual')">
-        <div class="pw-plan-name">Annual</div>
+        <div class="pw-plan-name">${L?'Anual':'Annual'}</div>
         <div class="pw-plan-price">$79<span style="font-size:16px">.99</span></div>
-        <div class="pw-plan-period">per year</div>
-        <div class="pw-plan-save">Save 33%</div>
+        <div class="pw-plan-period">${currentLang==="es"?"por año":"per year"}</div>
+        <div class="pw-plan-save">${currentLang==="es"?"Ahorra 33%":"Save 33%"}</div>
       </div>
     </div>
 
     <button class="pw-cta" id="pw-cta-btn" onclick="handleStripeCheckout()">
-      ⚡ START WITH CARD — STRIPE SECURE CHECKOUT
+      ${currentLang==="es"?"⚡ PAGAR CON TARJETA — CHECKOUT SEGURO STRIPE":"⚡ START WITH CARD — STRIPE SECURE CHECKOUT"}
     </button>
 
     <button class="pw-paypal" onclick="handlePayPalCheckout()">
@@ -1737,13 +1775,13 @@ if('serviceWorker' in navigator) {
     </button>
 
     <div class="pw-guarantee">
-      <strong>🔒 Secure checkout · Cancel anytime · No hidden fees</strong><br>
-      Processed by Stripe (Visa, Mastercard, Amex, Apple Pay, Google Pay, Cash App Pay)<br>
-      or PayPal. Your card info is never stored by Smart Money Scanner.
+      <strong>${currentLang==="es"?"🔒 Pago seguro · Cancela cuando quieras · Sin cargos ocultos":"🔒 Secure checkout · Cancel anytime · No hidden fees"}</strong><br>
+      ${currentLang==="es"?"Procesado por Stripe (Visa, Mastercard, Amex, Apple Pay, Google Pay)":"Processed by Stripe (Visa, Mastercard, Amex, Apple Pay, Google Pay, Cash App Pay)"}<br>
+      ${currentLang==="es"?"o PayPal. Tu información de tarjeta nunca es almacenada por Smart Money Scanner.":"or PayPal. Your card info is never stored by Smart Money Scanner."}
     </div>
 
     <span class="pw-dismiss" onclick="dismissPaywall()">
-      I understand I will lose access — dismiss for now
+      ${currentLang==="es"?"Entiendo que perderé acceso — cerrar por ahora":"I understand I will lose access — dismiss for now"}
     </span>
   </div>
 </div>
@@ -1792,12 +1830,12 @@ function initTrial() {
     banner.style.borderColor = 'rgba(239,71,111,0.4)';
     bannerDays.style.color = 'var(--red)';
     bannerDays.textContent = daysLeft;
-    bannerText.textContent = `days left in your free trial · Upgrade now to keep access`;
+    bannerText.textContent = currentLang==='es' ? `días restantes en tu prueba gratuita · Actualiza ahora para mantener el acceso` : `days left in your free trial · Upgrade now to keep access`;
   } else if (daysLeft <= 14) {
     // Last 14 days — show banner
     banner.style.display = 'flex';
     bannerDays.textContent = daysLeft;
-    bannerText.textContent = `days left in your free trial · Upgrade to keep full access`;
+    bannerText.textContent = currentLang==='es' ? `días restantes en tu prueba gratuita · Actualiza para mantener acceso completo` : `days left in your free trial · Upgrade to keep full access`;
   }
 
   // Update paywall progress bar
@@ -1815,9 +1853,27 @@ function validateToken(token) {
   } catch(e) { return false; }
 }
 
+function updatePaywallLang() {
+  const L = currentLang === 'es';
+  const el = (id) => document.getElementById(id);
+  if(el('pw-title')) el('pw-title').innerHTML = L ? 'Tu Prueba Gratuita<br>Ha Terminado' : 'Your Free Trial<br>Has Ended';
+  if(el('pw-sub')) el('pw-sub').textContent = L ? 'Has estado usando Smart Money Scanner para nivelar el campo. Mantén tu ventaja con una suscripción.' : 'You have been using Smart Money Scanner to level the field. Keep your edge with a subscription.';
+  if(el('pw-progress-title')) el('pw-progress-title').textContent = L ? 'Tu Período de Prueba Gratuita' : 'Your Free Trial Period';
+  if(el('pw-features-title')) el('pw-features-title').textContent = L ? 'Todo Incluido En Tu Suscripción' : 'Everything Included In Your Subscription';
+  const dismissEl = document.querySelector('.pw-dismiss');
+  if(dismissEl) dismissEl.textContent = L ? 'Entiendo que perderé acceso — descartar por ahora' : 'I understand I will lose access — dismiss for now';
+  const paywallBtn = document.getElementById('pw-cta-btn');
+  if(paywallBtn && !paywallBtn.disabled) paywallBtn.textContent = L ? `⚡ COMENZAR CON TARJETA — STRIPE SEGURO` : `⚡ START WITH CARD — STRIPE SECURE CHECKOUT`;
+  const ppBtn = document.querySelector('.pw-paypal');
+  if(ppBtn) ppBtn.innerHTML = L ? '<span style="font-size:18px;">🅿</span> Pagar con PayPal' : '<span style="font-size:18px;">🅿</span> Pay with PayPal';
+  const guarantee = document.querySelector('.pw-guarantee');
+  if(guarantee) guarantee.innerHTML = L ? '<strong>🔒 Pago seguro · Cancela cuando quieras · Sin cargos ocultos</strong><br>Procesado por Stripe o PayPal. Tu información nunca se almacena en Smart Money Scanner.' : '<strong>🔒 Secure checkout · Cancel anytime · No hidden fees</strong><br>Processed by Stripe (Visa, Mastercard, Amex, Apple Pay, Google Pay, Cash App Pay) or PayPal.';
+}
+
 function showPaywall() {
   document.getElementById('paywall-overlay').classList.add('show');
   document.body.style.overflow = 'hidden';
+  updatePaywallLang();
 }
 
 function hidePaywall() {
